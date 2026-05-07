@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { z } from "zod";
+import { auth } from "@clerk/nextjs/server";
 import { createServerClient } from "@/lib/supabase/server";
 import {
   generateListingContent,
@@ -15,18 +16,17 @@ import {
  *
  * Rôle : fonctions serveur appelées directement depuis les Client Components.
  * - "use server" : Next.js les compile en endpoints POST sécurisés.
- * - Validation des entrées avec Zod avant tout traitement.
- * - Authentification vérifiée à chaque action (pas de confiance côté client).
+ * - auth() de Clerk vérifie la session — remplace supabase.auth.getUser().
+ * - Supabase est utilisé uniquement comme base de données (pas pour l'auth).
  * - revalidatePath() invalide le cache Next.js après mutation.
  */
 
 /* ── Générer le contenu IA d'une annonce ──────────────────────────── */
 
 export async function generateListingAction(input: ListingInput) {
-  const supabase = await createServerClient();
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const { userId } = await auth();
 
-  if (authError || !user) {
+  if (!userId) {
     return { success: false as const, error: "Non authentifié." };
   }
 
@@ -41,8 +41,7 @@ export async function generateListingAction(input: ListingInput) {
   try {
     const generated = await generateListingContent(parsed.data);
     return { success: true as const, data: generated };
-  } catch (err) {
-    console.error("[generateListingAction]", err);
+  } catch {
     return { success: false as const, error: "Erreur lors de la génération IA." };
   }
 }
@@ -68,10 +67,9 @@ const CreateListingSchema = z.object({
 });
 
 export async function createListingAction(formData: unknown) {
-  const supabase = await createServerClient();
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const { userId } = await auth();
 
-  if (authError || !user) {
+  if (!userId) {
     return { success: false as const, error: "Non authentifié." };
   }
 
@@ -83,10 +81,12 @@ export async function createListingAction(formData: unknown) {
     };
   }
 
+  const supabase = await createServerClient();
+
   const { data: agency } = await supabase
     .from("agencies")
     .select("id")
-    .eq("owner_id", user.id)
+    .eq("owner_id", userId)
     .single();
 
   if (!agency) {
@@ -112,7 +112,6 @@ export async function createListingAction(formData: unknown) {
     .single();
 
   if (error) {
-    console.error("[createListingAction]", error);
     return { success: false as const, error: "Erreur lors de la création." };
   }
 
@@ -123,18 +122,29 @@ export async function createListingAction(formData: unknown) {
 /* ── Supprimer une annonce ────────────────────────────────────────── */
 
 export async function deleteListingAction(listingId: string) {
-  const supabase = await createServerClient();
-  const { data: { user }, error: authError } = await supabase.auth.getUser();
+  const { userId } = await auth();
 
-  if (authError || !user) {
+  if (!userId) {
     return { success: false as const, error: "Non authentifié." };
+  }
+
+  const supabase = await createServerClient();
+
+  const { data: agency } = await supabase
+    .from("agencies")
+    .select("id")
+    .eq("owner_id", userId)
+    .single();
+
+  if (!agency) {
+    return { success: false as const, error: "Agence introuvable." };
   }
 
   const { error } = await supabase
     .from("listings")
     .delete()
     .eq("id", listingId)
-    .eq("agency_id", supabase.from("agencies").select("id").eq("owner_id", user.id));
+    .eq("agency_id", agency.id);
 
   if (error) {
     return { success: false as const, error: "Suppression impossible." };

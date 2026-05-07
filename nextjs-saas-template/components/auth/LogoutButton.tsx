@@ -1,30 +1,23 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { SignOutButton } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { createClient } from "@/lib/supabase/client";
 
 /**
- * components/auth/LogoutButton.tsx — Bouton de déconnexion (Client Component)
+ * components/auth/LogoutButton.tsx — Bouton de déconnexion Clerk
  *
- * Rôle : déclenche la déconnexion Supabase depuis le navigateur.
- * - Isolé en Client Component pour garder Topbar.tsx en Server Component.
- * - Après déconnexion, redirige vers /login et rafraîchit le cache Next.js.
+ * Rôle : déclenche la déconnexion via Clerk.
+ * - SignOutButton de Clerk gère la suppression de la session côté client et serveur.
+ * - Après déconnexion, Clerk redirige automatiquement vers la page de connexion.
+ * - Marqué "use client" car SignOutButton est un composant interactif.
  */
 
 export default function LogoutButton() {
-  const router = useRouter();
-  const supabase = createClient();
-
-  async function handleLogout() {
-    await supabase.auth.signOut();
-    router.push("/login");
-    router.refresh();
-  }
-
   return (
-    <Button variant="outline" size="sm" onClick={handleLogout}>
-      Déconnexion
-    </Button>
+    <SignOutButton>
+      <Button variant="outline" size="sm">
+        Déconnexion
+      </Button>
+    </SignOutButton>
   );
 }

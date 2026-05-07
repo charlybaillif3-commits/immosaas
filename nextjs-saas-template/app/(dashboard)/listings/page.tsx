@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { auth } from "@clerk/nextjs/server";
 import { createServerClient } from "@/lib/supabase/server";
 import ListingsTable from "@/components/listings/ListingsTable";
 import { Button } from "@/components/ui/button";
@@ -8,9 +9,9 @@ import { Button } from "@/components/ui/button";
  * app/(dashboard)/listings/page.tsx — Liste des annonces de l'agence
  *
  * Rôle : affiche toutes les annonces immobilières de l'agence.
- * - Server Component avec fetch Supabase direct.
- * - Le tri et la pagination peuvent être gérés via searchParams (URL params).
- * - Le bouton "Nouvelle annonce" renvoie vers /listings/new où l'IA génère le texte.
+ * - auth() de Clerk récupère le userId — remplace supabase.auth.getUser().
+ * - Supabase est utilisé uniquement pour les requêtes en base de données.
+ * - searchParams gère le filtre par statut et la pagination via URL.
  */
 
 export const metadata: Metadata = {
@@ -22,13 +23,18 @@ export default async function ListingsPage({
 }: {
   searchParams: { status?: string; page?: string };
 }) {
+  const { userId } = await auth();
+
+  if (!userId) {
+    return null;
+  }
+
   const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
 
   const { data: agency } = await supabase
     .from("agencies")
     .select("id")
-    .eq("owner_id", user!.id)
+    .eq("owner_id", userId)
     .single();
 
   const page = Number(searchParams.page ?? 1);
@@ -62,7 +68,12 @@ export default async function ListingsPage({
         </Button>
       </div>
 
-      <ListingsTable listings={listings ?? []} total={count ?? 0} page={page} pageSize={pageSize} />
+      <ListingsTable
+        listings={listings ?? []}
+        total={count ?? 0}
+        page={page}
+        pageSize={pageSize}
+      />
     </div>
   );
 }

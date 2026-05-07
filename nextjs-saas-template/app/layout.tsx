@@ -1,15 +1,17 @@
 import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
+import { frFR } from "@clerk/localizations";
 import "./globals.css";
 
 /**
  * app/layout.tsx — Layout racine (Root Layout)
  *
  * Rôle : enveloppe TOUTES les pages de l'application.
- * - Définit les balises <html> et <body>.
+ * - ClerkProvider : requis au niveau racine pour que Clerk fonctionne partout.
+ *   frFR localise les composants Clerk en français.
  * - Charge la police Inter via next/font (optimisé, auto-hébergé).
  * - Exporte les métadonnées SEO globales.
- * - Tout Provider global (auth, theme, toast) va ici.
  */
 
 const inter = Inter({
@@ -52,10 +54,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="fr" className={inter.variable} suppressHydrationWarning>
-      <body className="min-h-screen bg-background font-sans antialiased">
-        {children}
-      </body>
-    </html>
+    <ClerkProvider localization={frFR}>
+      <html lang="fr" className={inter.variable} suppressHydrationWarning>
+        <body className="min-h-screen bg-background font-sans antialiased">
+          {children}
+        </body>
+      </html>
+    </ClerkProvider>
   );
 }

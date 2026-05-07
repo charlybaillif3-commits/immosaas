@@ -3,14 +3,14 @@ import { createServerClient } from "@/lib/supabase/server";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { ListingStatusBadge } from "@/components/ui/badge";
 import { formatPrice, formatSurface, formatRelativeDate } from "@/lib/utils";
+import type { ListingStatus } from "@/types";
 
 /**
  * components/dashboard/RecentListings.tsx — Liste des dernières annonces
  *
  * Rôle : affiche les 5 annonces les plus récentes de l'agence.
- * - Server Component avec fetch Supabase direct (pas d'API route intermédiaire).
- * - Utilisé dans le dashboard pour une vue rapide de l'activité.
- * - Chaque ligne est cliquable vers le détail de l'annonce.
+ * - Server Component avec fetch Supabase direct.
+ * - listing.status est casté en ListingStatus (type du domaine) et non "as never".
  */
 
 export default async function RecentListings({ agencyId }: { agencyId: string }) {
@@ -61,7 +61,7 @@ export default async function RecentListings({ agencyId }: { agencyId: string })
                 </p>
               </div>
               <div className="ml-4 flex items-center gap-3 shrink-0">
-                <ListingStatusBadge status={listing.status as never} />
+                <ListingStatusBadge status={listing.status as ListingStatus} />
                 <span className="text-xs text-muted-foreground">
                   {formatRelativeDate(listing.created_at)}
                 </span>

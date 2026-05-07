@@ -3,12 +3,10 @@ import { redirect } from "next/navigation";
 /**
  * app/page.tsx — Page racine "/"
  *
- * Rôle : simple redirecteur.
- * Dans un SaaS B2B, la racine n'a pas de contenu propre :
- * - Si connecté → dashboard (géré par middleware.ts)
- * - Si non connecté → page de login
- * Pour une landing page marketing, remplacer redirect() par le JSX de la page.
+ * Redirige vers la page de connexion Clerk (/sign-in).
+ * Le middleware protège les routes /dashboard, /listings, etc.
+ * et redirige lui-même les utilisateurs non connectés vers /sign-in.
  */
 export default function RootPage() {
-  redirect("/login");
+  redirect("/sign-in");
 }
