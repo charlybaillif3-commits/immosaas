@@ -1,12 +1,12 @@
-import { redirect } from "next/navigation";
+import { redirect } from 'next/navigation'
+import { auth } from '@clerk/nextjs/server'
 
-/**
- * app/page.tsx — Page racine "/"
- *
- * Redirige vers la page de connexion Clerk (/sign-in).
- * Le middleware protège les routes /dashboard, /listings, etc.
- * et redirige lui-même les utilisateurs non connectés vers /sign-in.
- */
-export default function RootPage() {
-  redirect("/sign-in");
+export default async function HomePage() {
+  const { userId } = await auth()
+  
+  if (userId) {
+    redirect('/dashboard')
+  } else {
+    redirect('/sign-in')
+  }
 }
