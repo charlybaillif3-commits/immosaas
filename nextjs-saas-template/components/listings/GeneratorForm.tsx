@@ -199,7 +199,7 @@ export default function GeneratorForm() {
         onDescChange={setEditDesc}
         onSave={handleSave}
         onReset={() => { setStep("form"); setGenerated(null); setApiError(null); }}
-        isSaving={step === "saving" || isPending}
+        isSaving={isPending}
       />
     );
   }
