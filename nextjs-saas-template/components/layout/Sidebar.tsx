@@ -40,7 +40,7 @@ export default function Sidebar() {
 
   function isActive(href: string): boolean {
     if (href === "/dashboard") return pathname === "/dashboard";
-    return pathname.startsWith(href);
+    return pathname === href || (href !== "/listings" && pathname.startsWith(href));
   }
 
   return (
