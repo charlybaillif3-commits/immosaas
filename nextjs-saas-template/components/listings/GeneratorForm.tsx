@@ -54,6 +54,9 @@ type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 
 /* ── Constantes ─────────────────────────────────────────────────────── */
 
+const INPUT_CLS =
+  "w-full rounded-lg border border-white/10 bg-[#1a1a2e] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors";
+
 const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "apartment",  label: "Appartement" },
   { value: "house",      label: "Maison" },
@@ -96,6 +99,27 @@ export default function GeneratorForm() {
   async function handleGenerate(e: React.FormEvent<HTMLFormElement>): Promise<void> {
     e.preventDefault();
     setApiError(null);
+
+    const surface = parseFloat(form.surface);
+    const price   = parseFloat(form.price);
+
+    if (!form.surface || isNaN(surface) || surface <= 0) {
+      setApiError("La surface est requise et doit être un nombre positif.");
+      return;
+    }
+    if (!form.price || isNaN(price) || price <= 0) {
+      setApiError("Le prix est requis et doit être un nombre positif.");
+      return;
+    }
+    if (!form.city.trim()) {
+      setApiError("La ville est requise.");
+      return;
+    }
+    if (!/^\d{5}$/.test(form.postalCode.trim())) {
+      setApiError("Le code postal doit contenir exactement 5 chiffres.");
+      return;
+    }
+
     setStep("generating");
 
     const highlightsList = form.highlights
@@ -246,7 +270,7 @@ export default function GeneratorForm() {
               min="1"
               step="0.5"
               required
-              className="input-field"
+              className={INPUT_CLS}
             />
           </FieldGroup>
 
@@ -257,7 +281,7 @@ export default function GeneratorForm() {
               onChange={(e) => update("rooms", e.target.value)}
               placeholder="3"
               min="1"
-              className="input-field"
+              className={INPUT_CLS}
             />
           </FieldGroup>
 
@@ -268,7 +292,7 @@ export default function GeneratorForm() {
               onChange={(e) => update("bedrooms", e.target.value)}
               placeholder="2"
               min="0"
-              className="input-field"
+              className={INPUT_CLS}
             />
           </FieldGroup>
         </div>
@@ -280,11 +304,11 @@ export default function GeneratorForm() {
               type="number"
               value={form.price}
               onChange={(e) => update("price", e.target.value)}
-              placeholder="285000"
+              placeholder="ex : 285 000"
               min="1"
               step="1000"
               required
-              className="input-field pr-10"
+              className={`${INPUT_CLS} pr-10`}
             />
             <span className="pointer-events-none absolute right-3.5 top-1/2 -translate-y-1/2 text-sm text-white/25">
               €
@@ -301,7 +325,7 @@ export default function GeneratorForm() {
               onChange={(e) => update("city", e.target.value)}
               placeholder="Lyon"
               required
-              className="input-field"
+              className={INPUT_CLS}
             />
           </FieldGroup>
 
@@ -314,7 +338,7 @@ export default function GeneratorForm() {
               pattern="\d{5}"
               maxLength={5}
               required
-              className="input-field"
+              className={INPUT_CLS}
             />
           </FieldGroup>
         </div>
@@ -329,7 +353,7 @@ export default function GeneratorForm() {
             onChange={(e) => update("highlights", e.target.value)}
             placeholder={"Terrasse exposée sud\nDernière étage avec vue dégagée\nParking privatif\nProximité métro ligne 6"}
             rows={4}
-            className="input-field resize-none"
+            className={`${INPUT_CLS} resize-none`}
           />
         </FieldGroup>
 
@@ -425,7 +449,7 @@ function Preview({
           type="text"
           value={editTitle}
           onChange={(e) => onTitleChange(e.target.value)}
-          className="input-field text-base font-semibold text-white/90"
+          className={`${INPUT_CLS} text-base font-semibold`}
         />
       </div>
 
@@ -438,7 +462,7 @@ function Preview({
           value={editDesc}
           onChange={(e) => onDescChange(e.target.value)}
           rows={9}
-          className="input-field resize-none leading-relaxed"
+          className={`${INPUT_CLS} resize-none leading-relaxed`}
         />
       </div>
 
