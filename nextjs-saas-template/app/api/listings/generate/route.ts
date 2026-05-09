@@ -115,21 +115,14 @@ Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans explication :
     return NextResponse.json({ success: false, error: "Réponse IA invalide.", raw: rawText }, { status: 502 });
   }
 
-  void supabase
-    .from("ai_usage")
-    .insert({
-      agency_id:   profile.agency_id as string,
-      user_id:     userId,
-      action_type: "generate_listing",
-      tokens_used: (anthropicData?.usage?.output_tokens as number | undefined) ?? 0,
-      model:       "claude-3-5-haiku-20241022",
-      metadata:    {
-        city:          input.city,
-        property_type: input.propertyType,
-      } as Record<string, unknown>,
-    })
-    .then(() => {})
-    .catch(() => {});
+  void supabase.from("ai_usage").insert({
+    agency_id: profile.agency_id as string,
+    user_id: userId,
+    action_type: "generate_listing" as const,
+    tokens_used: ((anthropicData?.usage?.output_tokens) as number | undefined) ?? 0,
+    model: "claude-3-5-haiku-20241022",
+    metadata: { city: input.city, propertyType: input.property_type } as Record<string, unknown>,
+  });
 
   return NextResponse.json({
     success: true,
