@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
 
   /* 3. Récupération de l'agencyId */
   const supabase = createAdminClient();
-  const { data: profile, error: profileError } = await supabase
+  const { data: profileRaw, error: profileError } = await supabase
     .from("profiles")
     .select("agency_id, id")
     .eq("id", userId)
