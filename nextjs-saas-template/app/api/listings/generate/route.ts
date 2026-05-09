@@ -110,7 +110,7 @@ export async function POST(req: NextRequest) {
   const supabase = createAdminClient();
   const { data: profile, error: profileError } = await supabase
     .from("profiles")
-    .select("agency_id")
+    .select("agency_id, id")
     .eq("id", userId)
     .single();
 
