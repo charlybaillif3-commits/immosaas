@@ -27,7 +27,8 @@ interface NavItem {
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard",  label: "Tableau de bord", icon: IconHome },
-  { href: "/listings",   label: "Annonces",         icon: IconHome },
+  { href: "/listings",     label: "Annonces",            icon: IconHome },
+  { href: "/listings/new", label: "Générer une annonce", icon: IconSparkles, badge: "IA" },
   { href: "/market",     label: "Market Analyzer",  icon: IconBarChart, badge: "IA" },
   { href: "/history",    label: "Historique",       icon: IconClock },
   { href: "/settings",   label: "Paramètres",       icon: IconCog },
