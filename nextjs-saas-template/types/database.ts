@@ -81,8 +81,22 @@ export type Database = {
           metadata: Record<string, unknown>
           created_at: string
         }
-        Insert: Omit<Database['public']['Tables']['ai_usage']['Row'], 'id' | 'created_at'>
-        Update: Partial<Database['public']['Tables']['ai_usage']['Insert']>
+        Insert: {
+          agency_id: string
+          user_id: string
+          action_type: string
+          tokens_used?: number
+          model?: string | null
+          metadata?: Record<string, unknown>
+        }
+        Update: Partial<{
+          agency_id: string
+          user_id: string
+          action_type: string
+          tokens_used: number
+          model: string | null
+          metadata: Record<string, unknown>
+        }>
       }
       market_analyses: {
         Row: {
