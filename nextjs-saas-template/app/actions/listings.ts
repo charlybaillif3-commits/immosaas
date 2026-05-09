@@ -1,6 +1,3 @@
-// app/actions/listings.ts
-// Server Actions pour la gestion des annonces
-
 'use server'
 
 import { auth } from '@clerk/nextjs/server'
