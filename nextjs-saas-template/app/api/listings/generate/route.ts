@@ -34,7 +34,9 @@ export async function POST(req: NextRequest) {
   }
 
   const body = await req.json();
+  console.log("BODY RECU:", JSON.stringify(body));
   const parsed = BodySchema.safeParse(body);
+  if (!parsed.success) console.log("ZOD ERRORS:", JSON.stringify(parsed.error.flatten()));
   if (!parsed.success) {
     return NextResponse.json({ success: false, error: "Données invalides.", details: parsed.error.flatten() }, { status: 422 });
   }
