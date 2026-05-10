@@ -305,8 +305,6 @@ export default function GeneratorForm() {
               value={form.price}
               onChange={(e) => update("price", e.target.value)}
               placeholder="ex : 285 000"
-              min="1"
-              step="1000"
               required
               className={`${INPUT_CLS} pr-10`}
             />
