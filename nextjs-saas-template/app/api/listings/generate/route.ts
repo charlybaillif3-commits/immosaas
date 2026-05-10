@@ -18,7 +18,8 @@ const BodySchema = z.object({
   price: z.number().positive(),
   city: z.string().min(1),
   postal_code: z.string().min(1),
-  highlights: z.string().optional(),
+  highlights: z.union([z.string(), z.array(z.string())]).optional().transform(v => Array.isArray(v) ? v.join("
+") : v),
 });
 
 const GeneratedContentSchema = z.object({
