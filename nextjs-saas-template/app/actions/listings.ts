@@ -60,3 +60,27 @@ export async function createListingAction(data: {
   revalidatePath('/listings')
   return { success: true }
 }
+
+export async function deleteListingAction(listingId: string): Promise<{ success: boolean; error?: string }> {
+  const { userId } = await auth()
+  if (!userId) return { success: false, error: 'Non authentifié' }
+
+  const { data: profile } = await supabase
+    .from('profiles')
+    .select('agency_id')
+    .eq('id', userId)
+    .single()
+
+  if (!profile?.agency_id) return { success: false, error: 'Profil introuvable' }
+
+  const { error } = await supabase
+    .from('listings')
+    .delete()
+    .eq('id', listingId)
+    .eq('agency_id', profile.agency_id)
+
+  if (error) return { success: false, error: error.message }
+
+  revalidatePath('/listings')
+  return { success: true }
+}
