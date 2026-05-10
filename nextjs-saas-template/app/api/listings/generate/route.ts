@@ -93,7 +93,7 @@ Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans explication :
       "anthropic-version": "2023-06-01",
     },
     body: JSON.stringify({
-      model: "claude-3-haiku-20240307",
+      model: "claude-haiku-4-5",
       max_tokens: 1024,
       messages: [{ role: "user", content: prompt }],
     }),
@@ -122,7 +122,7 @@ Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans explication :
     user_id: userId,
     action_type: "generate_listing" as const,
     tokens_used: ((anthropicData?.usage?.output_tokens) as number | undefined) ?? 0,
-    model: "claude-3-haiku-20240307",
+    model: "claude-haiku-4-5",
     metadata: { city: input.city, propertyType: input.property_type } as Record<string, unknown>,
   });
 
