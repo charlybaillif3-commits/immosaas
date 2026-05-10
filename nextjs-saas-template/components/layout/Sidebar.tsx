@@ -2,38 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  IconHome,
-  IconBarChart,
-  IconClock,
-  IconCog,
-  IconCreditCard,
-  IconSparkles,
-} from "@/components/layout/icons";
+import { IconSparkles } from "@/components/layout/icons";
+import { NAV_ITEMS } from "@/lib/nav-items";
 
 /**
  * components/layout/Sidebar.tsx — Navigation latérale (Client Component)
  *
  * "use client" requis pour usePathname() qui détecte la route active.
- * Design dark, sobre et professionnel — aucune lib externe.
+ * NAV_ITEMS importé depuis lib/nav-items.ts (source unique partagée avec MobileSidebar).
  */
-
-interface NavItem {
-  href: string;
-  label: string;
-  icon: React.FC<{ className?: string; "aria-hidden"?: boolean }>;
-  badge?: string;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { href: "/dashboard",  label: "Tableau de bord", icon: IconHome },
-  { href: "/listings",     label: "Annonces",            icon: IconHome },
-  { href: "/listings/new", label: "Générer une annonce", icon: IconSparkles, badge: "IA" },
-  { href: "/market",     label: "Market Analyzer",  icon: IconBarChart, badge: "IA" },
-  { href: "/history",    label: "Historique",       icon: IconClock },
-  { href: "/settings",   label: "Paramètres",       icon: IconCog },
-  { href: "/billing",    label: "Facturation",      icon: IconCreditCard },
-];
 
 export default function Sidebar() {
   const pathname = usePathname();

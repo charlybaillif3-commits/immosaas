@@ -3,30 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { IconMenu, IconX, IconHome, IconBarChart, IconClock, IconCog, IconCreditCard, IconSparkles } from "@/components/layout/icons";
+import { IconMenu, IconX, IconSparkles } from "@/components/layout/icons";
+import { NAV_ITEMS } from "@/lib/nav-items";
 
 /**
  * components/layout/MobileSidebar.tsx — Sidebar mobile (Client Component)
  *
  * Drawer overlay pour les écrans < lg.
- * Fermé au clic sur le backdrop ou sur un lien de navigation.
+ * NAV_ITEMS importé depuis lib/nav-items.ts (source unique partagée avec Sidebar).
  */
-
-interface NavItem {
-  href: string;
-  label: string;
-  icon: React.FC<{ className?: string; "aria-hidden"?: boolean }>;
-  badge?: string;
-}
-
-const NAV_ITEMS: NavItem[] = [
-  { href: "/dashboard",  label: "Tableau de bord", icon: IconHome },
-  { href: "/listings",   label: "Annonces",         icon: IconHome },
-  { href: "/market",     label: "Market Analyzer",  icon: IconBarChart, badge: "IA" },
-  { href: "/history",    label: "Historique",       icon: IconClock },
-  { href: "/settings",   label: "Paramètres",       icon: IconCog },
-  { href: "/billing",    label: "Facturation",      icon: IconCreditCard },
-];
 
 export default function MobileSidebar() {
   const [open, setOpen] = useState(false);
