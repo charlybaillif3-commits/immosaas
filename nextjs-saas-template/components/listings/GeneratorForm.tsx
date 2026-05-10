@@ -128,14 +128,14 @@ export default function GeneratorForm() {
       .filter((h) => h.length > 0);
 
     const payload = {
-      propertyType: form.propertyType,
-      surface:      parseFloat(form.surface),
-      rooms:        form.rooms    ? parseInt(form.rooms, 10)    : null,
-      bedrooms:     form.bedrooms ? parseInt(form.bedrooms, 10) : null,
-      price:        parseFloat(form.price),
-      city:         form.city.trim(),
-      postalCode:   form.postalCode.trim(),
-      highlights:   highlightsList.length > 0 ? highlightsList : ["Beau bien"],
+      property_type: form.propertyType,
+      surface:       parseFloat(form.surface),
+      rooms:         form.rooms    ? parseInt(form.rooms, 10)    : null,
+      bedrooms:      form.bedrooms ? parseInt(form.bedrooms, 10) : null,
+      price:         parseFloat(form.price),
+      city:          form.city.trim(),
+      postal_code:   form.postalCode.trim(),
+      highlights:    highlightsList.length > 0 ? highlightsList : ["Beau bien"],
     };
 
     let res: Response;
