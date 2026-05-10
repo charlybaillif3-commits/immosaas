@@ -5,20 +5,23 @@ import { createAdminClient } from "@/lib/supabase/admin";
 
 const PropertyTypeSchema = z.enum([
   "apartment",
-  "house", 
+  "house",
   "land",
   "commercial",
   "parking",
 ]);
 
+const GenerationStyleSchema = z.enum(["prestige", "standard", "coup_de_coeur"]).default("standard");
+
 const BodySchema = z.object({
   property_type: PropertyTypeSchema,
-  surface: z.number().positive(),
-  rooms: z.number().int().positive(),
-  price: z.number().positive(),
-  city: z.string().min(1),
-  postal_code: z.string().min(1),
-  highlights: z.union([z.string(), z.array(z.string())]).optional().transform((v) => Array.isArray(v) ? v.join(", ") : v),
+  style:         GenerationStyleSchema,
+  surface:       z.number().positive(),
+  rooms:         z.number().int().positive(),
+  price:         z.number().positive(),
+  city:          z.string().min(1),
+  postal_code:   z.string().min(1),
+  highlights:    z.union([z.string(), z.array(z.string())]).optional().transform((v) => Array.isArray(v) ? v.join(", ") : v),
 });
 
 const GeneratedContentSchema = z.object({
@@ -63,25 +66,46 @@ export async function POST(req: NextRequest) {
 
   const propertyLabels: Record<string, string> = {
     apartment: "appartement",
-    house: "maison",
-    land: "terrain",
+    house:     "maison",
+    land:      "terrain",
     commercial: "local commercial",
-    parking: "parking",
+    parking:   "parking",
   };
 
-  const prompt = `Tu es un expert en immobilier français. Génère une annonce immobilière professionnelle et attractive.
+  const styleInstructions: Record<z.infer<typeof GenerationStyleSchema>, string> = {
+    prestige: `Tu es un rédacteur spécialisé en immobilier de luxe et prestige.
+Ton vocabulaire est raffiné, élégant et aspirationnel. Tu t'adresses à une clientèle haut de gamme exigeante.
+Évite les expressions trop communes. Chaque mot doit inspirer désir, exclusivité et art de vivre.
+Le titre doit être évocateur et distingué (60-80 caractères).
+La description doit faire 150-250 mots, riche en adjectifs qualitatifs, avec une introduction qui pose le cadre de vie.`,
 
-Bien : ${propertyLabels[input.property_type] ?? input.property_type}
-Surface : ${input.surface} m²
-Pièces : ${input.rooms}
-Prix : ${input.price.toLocaleString("fr-FR")} €
-Ville : ${input.city} (${input.postal_code})
-${input.highlights ? `Points forts mentionnés par l'agent : ${input.highlights}` : ""}
+    standard: `Tu es un rédacteur immobilier professionnel. Ton style est clair, factuel et efficace.
+Tu mets en avant les caractéristiques clés du bien de manière directe et convaincante, sans fioritures inutiles.
+L'annonce doit être lisible, honnête et persuasive.
+Le titre doit être précis et informatif (60-80 caractères).
+La description doit faire 150-250 mots, structurée logiquement : caractéristiques principales, localisation, atouts.`,
+
+    coup_de_coeur: `Tu es un rédacteur immobilier expert en storytelling émotionnel.
+Tu racontes une histoire, tu crées un coup de foudre immobilier. Tu t'adresses aux émotions et aux rêves de l'acheteur.
+Ton ton est chaleureux, enthousiaste et vivant. Utilise des images concrètes qui font visualiser la vie dans ce bien.
+Le titre doit être accrocheur, original, presque poétique (60-80 caractères).
+La description doit faire 150-250 mots, avec une ouverture narrative qui plonge le lecteur dans une scène de vie.`,
+  };
+
+  const prompt = `${styleInstructions[input.style]}
+
+Caractéristiques du bien :
+- Type : ${propertyLabels[input.property_type] ?? input.property_type}
+- Surface : ${input.surface} m²
+- Pièces : ${input.rooms}
+- Prix : ${input.price.toLocaleString("fr-FR")} €
+- Localisation : ${input.city} (${input.postal_code})
+${input.highlights ? `- Points forts mentionnés par l'agent : ${input.highlights}` : ""}
 
 Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans explication :
 {
   "titre": "titre accrocheur de 60-80 caractères",
-  "description": "description complète de 200-300 mots, professionnelle et séduisante",
+  "description": "annonce de 150-250 mots",
   "points_forts": ["point 1", "point 2", "point 3", "point 4", "point 5"]
 }`;
 
@@ -123,7 +147,7 @@ Réponds UNIQUEMENT avec un JSON valide, sans markdown, sans explication :
     action_type: "generate_listing" as const,
     tokens_used: ((anthropicData?.usage?.output_tokens) as number | undefined) ?? 0,
     model: "claude-haiku-4-5",
-    metadata: { city: input.city, propertyType: input.property_type } as Record<string, unknown>,
+    metadata: { city: input.city, propertyType: input.property_type, style: input.style } as Record<string, unknown>,
   });
 
   return NextResponse.json({

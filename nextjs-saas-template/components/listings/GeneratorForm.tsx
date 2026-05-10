@@ -19,11 +19,13 @@ import { createListingAction } from "@/app/actions/listings";
 
 /* ── Types ──────────────────────────────────────────────────────────── */
 
-type PropertyType = "apartment" | "house" | "land" | "commercial" | "parking";
-type Step = "form" | "generating" | "preview" | "saving";
+type PropertyType   = "apartment" | "house" | "land" | "commercial" | "parking";
+type ListingStyle   = "prestige" | "standard" | "coup_de_coeur";
+type Step           = "form" | "generating" | "preview" | "saving";
 
 interface FormValues {
   propertyType: PropertyType;
+  style:        ListingStyle;
   surface:      string;
   rooms:        string;
   bedrooms:     string;
@@ -65,8 +67,15 @@ const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "parking",    label: "Parking" },
 ];
 
+const LISTING_STYLES: Array<{ value: ListingStyle; label: string; desc: string }> = [
+  { value: "prestige",      label: "✦ Prestige",      desc: "Luxe & raffinement" },
+  { value: "standard",      label: "◆ Standard",      desc: "Clair & factuel" },
+  { value: "coup_de_coeur", label: "♥ Coup de cœur",  desc: "Émotion & storytelling" },
+];
+
 const INITIAL_FORM: FormValues = {
   propertyType: "apartment",
+  style:        "standard",
   surface:      "",
   rooms:        "",
   bedrooms:     "",
@@ -129,6 +138,7 @@ export default function GeneratorForm() {
 
     const payload = {
       property_type: form.propertyType,
+      style:         form.style,
       surface:       parseFloat(form.surface),
       rooms:         form.rooms    ? parseInt(form.rooms, 10)    : null,
       bedrooms:      form.bedrooms ? parseInt(form.bedrooms, 10) : null,
@@ -237,6 +247,33 @@ export default function GeneratorForm() {
       )}
 
       <form onSubmit={handleGenerate} className="space-y-6">
+
+        {/* Style de rédaction */}
+        <FieldGroup label="Style de rédaction" hint="Choisissez le ton que Claude utilisera pour rédiger votre annonce">
+          <div className="grid grid-cols-3 gap-2">
+            {LISTING_STYLES.map((s) => (
+              <button
+                key={s.value}
+                type="button"
+                onClick={() => update("style", s.value)}
+                className={[
+                  "flex flex-col items-center gap-0.5 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
+                  form.style === s.value
+                    ? "border-sky-500/60 bg-sky-500/10 text-sky-400"
+                    : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
+                ].join(" ")}
+              >
+                <span className="text-[13px] font-semibold">{s.label}</span>
+                <span className={[
+                  "text-[10px]",
+                  form.style === s.value ? "text-sky-400/70" : "text-white/25",
+                ].join(" ")}>
+                  {s.desc}
+                </span>
+              </button>
+            ))}
+          </div>
+        </FieldGroup>
 
         {/* Type de bien */}
         <FieldGroup label="Type de bien">
