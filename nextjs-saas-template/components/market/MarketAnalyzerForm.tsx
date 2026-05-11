@@ -255,7 +255,7 @@ export default function MarketAnalyzerForm() {
             className="flex items-center gap-2 rounded-lg bg-sky-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400 hover:shadow-sky-400/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
           >
             <SparkleIcon />
-            Analyser avec Claude IA
+            Analyser
           </button>
         </div>
       </form>
@@ -294,7 +294,7 @@ function AnalyzingLoader({ city }: { city: string }) {
         <SparkleIcon className="absolute inset-0 m-auto h-5 w-5 text-sky-400" />
       </div>
       <p className="text-base font-medium text-white/80">
-        Claude analyse le marché de <span className="text-sky-400">{city}</span>…
+        Analyse du marché de <span className="text-sky-400">{city}</span>…
       </p>
       <p className="mt-1 text-sm text-white/30">
         Score, prix médian, tendance, recommandations…

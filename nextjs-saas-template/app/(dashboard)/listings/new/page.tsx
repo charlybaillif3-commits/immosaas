@@ -11,7 +11,7 @@ import GeneratorForm from "@/components/listings/GeneratorForm";
 
 export const metadata: Metadata = {
   title: "Nouvelle annonce IA",
-  description: "Générez une annonce immobilière professionnelle avec Claude IA.",
+  description: "Générez une annonce immobilière professionnelle.",
 };
 
 export default function NewListingPage() {
@@ -38,7 +38,7 @@ export default function NewListingPage() {
           </div>
           <div>
             <h1 className="text-xl font-semibold tracking-tight text-white">
-              Générer une annonce avec Claude IA
+              Générer une annonce
             </h1>
             <p className="mt-0.5 text-sm text-white/40">
               Renseignez les caractéristiques du bien — l&apos;IA rédige le titre,
@@ -53,12 +53,6 @@ export default function NewListingPage() {
         <GeneratorForm />
       </div>
 
-      {/* Note bas de page */}
-      <p className="text-center text-[11px] text-white/20">
-        Propulsé par{" "}
-        <span className="text-white/35">Claude claude-3-5-haiku</span> · Anthropic ·
-        Contenu généré à titre indicatif, relecture recommandée
-      </p>
     </div>
   );
 }

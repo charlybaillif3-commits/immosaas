@@ -53,7 +53,7 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
         <div className="flex items-center gap-2">
           <span className="text-emerald-400">✦</span>
           <p className="text-sm text-emerald-400/90">
-            Analyse générée par Claude IA —{" "}
+            Analyse —{" "}
             <span className="font-medium">{location}</span>
             {" · "}{typeLabel}
           </p>

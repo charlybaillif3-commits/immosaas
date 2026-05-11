@@ -249,7 +249,7 @@ export default function GeneratorForm() {
       <form onSubmit={handleGenerate} className="space-y-6">
 
         {/* Style de rédaction */}
-        <FieldGroup label="Style de rédaction" hint="Choisissez le ton que Claude utilisera pour rédiger votre annonce">
+        <FieldGroup label="Style de rédaction" hint="Choisissez le ton de la rédaction">
           <div className="grid grid-cols-3 gap-2">
             {LISTING_STYLES.map((s) => (
               <button
@@ -399,7 +399,7 @@ export default function GeneratorForm() {
             className="flex items-center gap-2 rounded-lg bg-sky-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400 hover:shadow-sky-400/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
           >
             <SparkleIcon />
-            Générer avec Claude IA
+            Générer
           </button>
         </div>
       </form>
@@ -438,7 +438,7 @@ function GeneratingLoader() {
         <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-sky-400" />
         <SparkleIcon className="absolute inset-0 m-auto w-5 h-5 text-sky-400" />
       </div>
-      <p className="text-base font-medium text-white/80">Claude rédige votre annonce…</p>
+      <p className="text-base font-medium text-white/80">Rédaction de votre annonce en cours…</p>
       <p className="mt-1 text-sm text-white/35">Génération du titre, de la description et des points forts</p>
     </div>
   );
