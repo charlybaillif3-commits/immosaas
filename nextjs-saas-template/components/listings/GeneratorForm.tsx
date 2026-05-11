@@ -57,7 +57,7 @@ type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 /* ── Constantes ─────────────────────────────────────────────────────── */
 
 const INPUT_CLS =
-  "w-full rounded-lg border border-white/10 bg-[#1a1a2e] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors";
+  "w-full rounded-lg border border-white/10 bg-[#1a1a2e] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors";
 
 const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "apartment",  label: "Appartement" },
@@ -259,14 +259,14 @@ export default function GeneratorForm() {
                 className={[
                   "flex flex-col items-center gap-0.5 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
                   form.style === s.value
-                    ? "border-sky-500/60 bg-sky-500/10 text-sky-400"
+                    ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-400"
                     : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
                 ].join(" ")}
               >
                 <span className="text-[13px] font-semibold">{s.label}</span>
                 <span className={[
                   "text-[10px]",
-                  form.style === s.value ? "text-sky-400/70" : "text-white/25",
+                  form.style === s.value ? "text-indigo-400/70" : "text-white/25",
                 ].join(" ")}>
                   {s.desc}
                 </span>
@@ -286,7 +286,7 @@ export default function GeneratorForm() {
                 className={[
                   "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
                   form.propertyType === pt.value
-                    ? "border-sky-500/60 bg-sky-500/10 text-sky-400"
+                    ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-400"
                     : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
                 ].join(" ")}
               >
@@ -396,7 +396,7 @@ export default function GeneratorForm() {
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-lg bg-sky-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400 hover:shadow-sky-400/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
+            className="flex items-center gap-2 rounded-lg bg-indigo-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400 hover:shadow-indigo-400/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
           >
             <SparkleIcon />
             Générer
@@ -422,7 +422,7 @@ function FieldGroup({ label, hint, required, className, children }: FieldGroupPr
     <div className={className}>
       <label className="mb-1.5 block text-xs font-medium text-white/50">
         {label}
-        {required && <span className="ml-0.5 text-sky-400">*</span>}
+        {required && <span className="ml-0.5 text-indigo-400">*</span>}
       </label>
       {children}
       {hint && <p className="mt-1 text-[11px] text-white/25">{hint}</p>}
@@ -434,9 +434,9 @@ function GeneratingLoader() {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <div className="relative mb-5 h-12 w-12">
-        <div className="absolute inset-0 rounded-full border-2 border-sky-500/20" />
-        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-sky-400" />
-        <SparkleIcon className="absolute inset-0 m-auto w-5 h-5 text-sky-400" />
+        <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20" />
+        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-indigo-400" />
+        <SparkleIcon className="absolute inset-0 m-auto w-5 h-5 text-indigo-400" />
       </div>
       <p className="text-base font-medium text-white/80">Rédaction de votre annonce en cours…</p>
       <p className="mt-1 text-sm text-white/35">Génération du titre, de la description et des points forts</p>
@@ -507,7 +507,7 @@ function Preview({
         <ul className="space-y-2">
           {generated.points_forts.map((point, i) => (
             <li key={i} className="flex items-start gap-3 text-sm text-white/70">
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-500/15 text-[10px] font-bold text-sky-400">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/15 text-[10px] font-bold text-indigo-400">
                 {i + 1}
               </span>
               {point}
@@ -531,7 +531,7 @@ function Preview({
           type="button"
           onClick={onSave}
           disabled={isSaving}
-          className="flex items-center gap-2 rounded-lg bg-sky-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 rounded-lg bg-indigo-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSaving ? (
             <>

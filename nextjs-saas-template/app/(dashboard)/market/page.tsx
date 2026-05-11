@@ -18,7 +18,7 @@ export default async function MarketPage() {
           <h1 className="text-2xl font-semibold tracking-tight text-white">
             Market Analyzer
           </h1>
-          <span className="rounded-full bg-sky-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-sky-400">
+          <span className="rounded-full bg-indigo-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-indigo-400">
             IA
           </span>
         </div>

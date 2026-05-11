@@ -28,7 +28,7 @@ export default function MobileSidebar() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex items-center justify-center rounded-lg p-2 text-white/50 hover:bg-white/[0.06] hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50 lg:hidden"
+        className="flex items-center justify-center rounded-lg p-2 text-white/50 hover:bg-white/[0.06] hover:text-white/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50 lg:hidden"
         aria-label="Ouvrir le menu"
       >
         <IconMenu className="w-5 h-5" aria-hidden />
@@ -54,8 +54,8 @@ export default function MobileSidebar() {
         {/* Header */}
         <div className="flex h-16 items-center justify-between border-b border-white/[0.06] px-5">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/15">
-              <IconSparkles className="w-4 h-4 text-sky-400" aria-hidden />
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/15">
+              <IconSparkles className="w-4 h-4 text-indigo-400" aria-hidden />
             </div>
             <span className="text-[15px] font-semibold tracking-tight text-white">Propstack</span>
           </div>
@@ -83,20 +83,20 @@ export default function MobileSidebar() {
                 className={[
                   "group relative flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
                   active
-                    ? "bg-sky-500/10 text-sky-400"
+                    ? "bg-indigo-500/10 text-indigo-400"
                     : "text-white/50 hover:bg-white/[0.04] hover:text-white/90",
                 ].join(" ")}
               >
                 {active && (
-                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-full bg-sky-400" />
+                  <span className="absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.5 rounded-full bg-indigo-400" />
                 )}
                 <Icon
-                  className={["w-[18px] h-[18px] shrink-0", active ? "text-sky-400" : "text-white/35"].join(" ")}
+                  className={["w-[18px] h-[18px] shrink-0", active ? "text-indigo-400" : "text-white/35"].join(" ")}
                   aria-hidden
                 />
                 <span className="flex-1 truncate">{item.label}</span>
                 {item.badge && (
-                  <span className="rounded-md bg-sky-500/15 px-1.5 py-0.5 text-[10px] font-semibold text-sky-400 ring-1 ring-sky-500/20">
+                  <span className="rounded-md bg-indigo-500/15 px-1.5 py-0.5 text-[10px] font-semibold text-indigo-400 ring-1 ring-indigo-500/20">
                     {item.badge}
                   </span>
                 )}

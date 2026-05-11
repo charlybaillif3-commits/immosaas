@@ -112,7 +112,7 @@ export default function BillingPage() {
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
                   <div
-                    className={["h-full rounded-full", pct > 80 ? "bg-amber-400" : "bg-sky-500"].join(" ")}
+                    className={["h-full rounded-full", pct > 80 ? "bg-amber-400" : "bg-indigo-500"].join(" ")}
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -134,12 +134,12 @@ export default function BillingPage() {
                 className={[
                   "relative flex flex-col rounded-xl border p-6 transition-colors",
                   plan.highlight
-                    ? "border-sky-500/30 bg-sky-500/[0.04]"
+                    ? "border-indigo-500/30 bg-indigo-500/[0.04]"
                     : "border-white/[0.06] bg-[#0d0d14]",
                 ].join(" ")}
               >
                 {plan.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-sky-500 px-3 py-0.5 text-[11px] font-semibold text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-500 px-3 py-0.5 text-[11px] font-semibold text-white">
                     Populaire
                   </span>
                 )}
@@ -156,7 +156,7 @@ export default function BillingPage() {
                 <ul className="mb-6 flex-1 space-y-2">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-[13px] text-white/50">
-                      <span className="mt-0.5 text-sky-400">✓</span>
+                      <span className="mt-0.5 text-indigo-400">✓</span>
                       {f}
                     </li>
                   ))}
@@ -170,7 +170,7 @@ export default function BillingPage() {
                     isCurrent
                       ? "cursor-default bg-white/[0.04] text-white/25"
                       : plan.highlight
-                        ? "bg-sky-500 text-white hover:bg-sky-400"
+                        ? "bg-indigo-500 text-white hover:bg-indigo-400"
                         : "border border-white/[0.08] text-white/60 hover:bg-white/[0.05] hover:text-white/90",
                   ].join(" ")}
                 >

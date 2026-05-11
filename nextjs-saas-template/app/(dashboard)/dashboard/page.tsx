@@ -54,7 +54,7 @@ export default async function DashboardPage() {
         <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14]">
           <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
             <h2 className="text-sm font-semibold text-white/90">Annonces récentes</h2>
-            <a href="/listings" className="text-xs text-sky-400 hover:text-sky-300 transition-colors">
+            <a href="/listings" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
               Voir tout →
             </a>
           </div>
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
         <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14]">
           <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
             <h2 className="text-sm font-semibold text-white/90">Activité IA récente</h2>
-            <a href="/history" className="text-xs text-sky-400 hover:text-sky-300 transition-colors">
+            <a href="/history" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
               Historique →
             </a>
           </div>
@@ -97,8 +97,8 @@ export default async function DashboardPage() {
               { action: "Annonce générée",    detail: "Maison Lyon 6e",         tokens: "395 tokens", ago: "Hier"       },
             ].map((item) => (
               <div key={`${item.action}-${item.ago}`} className="flex items-start gap-3 px-5 py-3.5">
-                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-sky-500/10">
-                  <span className="text-[10px] text-sky-400">✦</span>
+                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500/10">
+                  <span className="text-[10px] text-indigo-400">✦</span>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[13px] font-medium text-white/80">{item.action}</p>

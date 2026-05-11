@@ -23,14 +23,14 @@ export default async function SettingsPage() {
           {user?.imageUrl ? (
             <img src={user.imageUrl} alt={fullName} className="h-14 w-14 rounded-full object-cover ring-2 ring-white/10" />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-sky-500/15 text-lg font-bold text-sky-400 ring-2 ring-white/10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-500/15 text-lg font-bold text-indigo-400 ring-2 ring-white/10">
               {fullName.charAt(0).toUpperCase()}
             </div>
           )}
           <div>
             <p className="text-sm font-medium text-white/80">{fullName || "—"}</p>
             <p className="text-xs text-white/35">{email}</p>
-            <p className="mt-1 text-[11px] text-sky-400/70">
+            <p className="mt-1 text-[11px] text-indigo-400/70">
               Gérez votre avatar et mot de passe sur Clerk →
             </p>
           </div>
@@ -51,7 +51,7 @@ export default async function SettingsPage() {
                 defaultValue={field.value}
                 placeholder={field.placeholder}
                 readOnly={field.label === "Email"}
-                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 placeholder:text-white/20 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 read-only:opacity-50 read-only:cursor-not-allowed transition-colors"
+                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 placeholder:text-white/20 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 read-only:opacity-50 read-only:cursor-not-allowed transition-colors"
               />
             </div>
           ))}
@@ -60,7 +60,7 @@ export default async function SettingsPage() {
         <div className="mt-5 flex justify-end">
           <button
             type="button"
-            className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-400"
+            className="rounded-lg bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-400"
           >
             Enregistrer
           </button>
@@ -76,7 +76,7 @@ export default async function SettingsPage() {
             <label className="mb-1.5 block text-xs font-medium text-white/40">
               Ton par défaut des annonces
             </label>
-            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors">
+            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors">
               <option value="professional">Professionnel</option>
               <option value="friendly">Chaleureux</option>
               <option value="luxury">Luxe / Prestige</option>
@@ -87,7 +87,7 @@ export default async function SettingsPage() {
             <label className="mb-1.5 block text-xs font-medium text-white/40">
               Langue des annonces générées
             </label>
-            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors">
+            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors">
               <option value="fr">Français</option>
               <option value="en">English</option>
             </select>
@@ -97,7 +97,7 @@ export default async function SettingsPage() {
         <div className="mt-5 flex justify-end">
           <button
             type="button"
-            className="rounded-lg bg-sky-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-sky-400"
+            className="rounded-lg bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-400"
           >
             Enregistrer
           </button>

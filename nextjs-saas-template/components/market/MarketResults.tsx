@@ -131,7 +131,7 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
         {/* Recommandations pricing */}
         <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
           <div className="mb-4 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-sky-500/10 text-xs text-sky-400">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-500/10 text-xs text-indigo-400">
               €
             </span>
             <h3 className="text-sm font-semibold text-white/80">Stratégie de prix</h3>
@@ -139,7 +139,7 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
           <ol className="space-y-3">
             {analysis.recommandations_pricing.map((rec, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-white/60">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-sky-500/10 text-[10px] font-bold text-sky-400">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/10 text-[10px] font-bold text-indigo-400">
                   {i + 1}
                 </span>
                 {rec}
@@ -172,7 +172,7 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
       {/* Synthèse */}
       <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
         <div className="mb-3 flex items-center gap-2">
-          <SparkleIcon className="h-4 w-4 text-sky-400" />
+          <SparkleIcon className="h-4 w-4 text-indigo-400" />
           <h3 className="text-sm font-semibold text-white/80">Synthèse du marché</h3>
         </div>
         <p className="text-sm leading-relaxed text-white/55">

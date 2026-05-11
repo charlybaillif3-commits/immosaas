@@ -20,7 +20,7 @@ const ACTION_LABELS: Record<ActionType, string> = {
 };
 
 const ACTION_COLORS: Record<ActionType, string> = {
-  generate_listing:     "bg-sky-500/10 text-sky-400",
+  generate_listing:     "bg-indigo-500/10 text-indigo-400",
   analyze_market:       "bg-violet-500/10 text-violet-400",
   generate_description: "bg-emerald-500/10 text-emerald-400",
 };

@@ -8,6 +8,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Propstack — Génération d\'annonces IA pour agences immobilières',
   description: 'La plateforme IA pour agences immobilières. Annonces professionnelles et analyse de marché.',
+  themeColor: '#6366f1',
 }
 
 export default function RootLayout({

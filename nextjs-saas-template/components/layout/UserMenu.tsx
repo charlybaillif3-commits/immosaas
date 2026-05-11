@@ -49,7 +49,7 @@ export default function UserMenu() {
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
+        className="flex items-center gap-2.5 rounded-lg px-2.5 py-1.5 text-sm transition-colors hover:bg-white/[0.05] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
         aria-expanded={open}
         aria-haspopup="true"
       >
@@ -61,7 +61,7 @@ export default function UserMenu() {
             className="h-7 w-7 rounded-full object-cover ring-1 ring-white/10"
           />
         ) : (
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-sky-500/20 text-[11px] font-semibold text-sky-400 ring-1 ring-sky-500/30">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-indigo-500/20 text-[11px] font-semibold text-indigo-400 ring-1 ring-indigo-500/30">
             {initials}
           </span>
         )}

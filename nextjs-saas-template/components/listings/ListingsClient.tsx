@@ -91,7 +91,7 @@ const DATE_OPTIONS: Array<{ value: DateFilter; label: string }> = [
 ];
 
 const SELECT_CLS =
-  "rounded-lg border border-white/[0.08] bg-[#0d0d14] px-3 py-2 text-sm text-white/70 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors";
+  "rounded-lg border border-white/[0.08] bg-[#0d0d14] px-3 py-2 text-sm text-white/70 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors";
 
 /* ── Helpers ────────────────────────────────────────────────────────── */
 
@@ -224,7 +224,7 @@ export default function ListingsClient({ initialListings }: Props) {
         </div>
         <Link
           href="/listings/new"
-          className="flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400"
+          className="flex items-center gap-2 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400"
         >
           <SparkleIcon />
           Générer une annonce
@@ -255,7 +255,7 @@ export default function ListingsClient({ initialListings }: Props) {
             placeholder="Rechercher par titre ou ville…"
             value={search}
             onChange={(e) => { setSearch(e.target.value); setPage(1); }}
-            className="w-full rounded-lg border border-white/[0.08] bg-[#0d0d14] py-2 pl-9 pr-3.5 text-sm text-white placeholder:text-white/25 focus:border-sky-500/40 focus:outline-none focus:ring-1 focus:ring-sky-500/30 transition-colors"
+            className="w-full rounded-lg border border-white/[0.08] bg-[#0d0d14] py-2 pl-9 pr-3.5 text-sm text-white placeholder:text-white/25 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors"
           />
         </div>
 
@@ -402,7 +402,7 @@ function ListingCard({ listing, isCopied, isDeleting, onCopy, onDelete }: CardPr
               {statusLabel}
             </span>
             {listing.ai_generated && (
-              <span className="rounded-md bg-sky-500/10 px-2 py-0.5 text-[10px] font-semibold text-sky-400">
+              <span className="rounded-md bg-indigo-500/10 px-2 py-0.5 text-[10px] font-semibold text-indigo-400">
                 IA
               </span>
             )}
@@ -495,7 +495,7 @@ function EmptyState({ hasFilters, onReset }: { hasFilters: boolean; onReset: () 
           <button
             type="button"
             onClick={onReset}
-            className="mt-3 text-sm text-sky-400 underline-offset-2 hover:underline"
+            className="mt-3 text-sm text-indigo-400 underline-offset-2 hover:underline"
           >
             Réinitialiser les filtres
           </button>
@@ -507,7 +507,7 @@ function EmptyState({ hasFilters, onReset }: { hasFilters: boolean; onReset: () 
           <p className="mt-1 text-xs text-white/20">Générez votre première annonce avec l&apos;IA</p>
           <Link
             href="/listings/new"
-            className="mt-5 flex items-center gap-2 rounded-lg bg-sky-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-sky-500/20 transition-all hover:bg-sky-400"
+            className="mt-5 flex items-center gap-2 rounded-lg bg-indigo-500 px-4 py-2 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400"
           >
             <SparkleIcon className="h-3.5 w-3.5" />
             Générer une annonce
@@ -536,7 +536,7 @@ function PaginationBtn({
       className={[
         "flex h-7 min-w-[28px] items-center justify-center rounded-md px-1 text-xs transition-colors",
         active
-          ? "bg-sky-500/20 font-semibold text-sky-400"
+          ? "bg-indigo-500/20 font-semibold text-indigo-400"
           : "text-white/40 hover:bg-white/[0.04] hover:text-white/70",
         disabled ? "pointer-events-none opacity-20" : "",
       ].join(" ")}

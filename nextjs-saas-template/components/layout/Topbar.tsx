@@ -26,12 +26,12 @@ export default function Topbar() {
         {/* Bouton notifications */}
         <button
           type="button"
-          className="relative flex h-8 w-8 items-center justify-center rounded-lg text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-500/50"
+          className="relative flex h-8 w-8 items-center justify-center rounded-lg text-white/40 transition-colors hover:bg-white/[0.05] hover:text-white/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
           aria-label="Notifications"
         >
           <IconBell className="w-[18px] h-[18px]" aria-hidden />
           {/* Indicateur non-lus */}
-          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-sky-400 ring-2 ring-[#0d0d14]" />
+          <span className="absolute right-1.5 top-1.5 h-1.5 w-1.5 rounded-full bg-indigo-400 ring-2 ring-[#0d0d14]" />
         </button>
 
         {/* Séparateur */}
