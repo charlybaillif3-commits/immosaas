@@ -1,5 +1,5 @@
 -- ============================================================================
--- ImmoSaaS — Schéma Supabase complet
+-- Orial — Schéma Supabase complet
 -- Stack : Next.js 14 + Clerk (auth) + Supabase (DB uniquement)
 --
 -- Instructions :

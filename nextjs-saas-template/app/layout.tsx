@@ -6,7 +6,7 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'ImmoSaaS — Génération d\'annonces IA',
+  title: 'Orial — Génération d\'annonces IA',
   description: 'Plateforme SaaS pour agences immobilières',
 }
 
