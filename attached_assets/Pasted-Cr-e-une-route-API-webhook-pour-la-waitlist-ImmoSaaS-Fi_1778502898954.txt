@@ -1,0 +1,52 @@
+Crée une route API webhook pour la waitlist ImmoSaaS.
+
+Fichier à créer : app/api/waitlist/route.ts
+
+Fonctionnement :
+1. Reçoit un POST webhook depuis Tally avec les données du formulaire
+2. Extrait email et nom_agence depuis le payload Tally
+3. Envoie un email de confirmation via Resend à l'email de l'inscrit
+4. Retourne { success: true }
+
+Format webhook Tally :
+{
+  "data": {
+    "fields": [
+      { "label": "Votre email professionnel", "value": "email@agence.fr" },
+      { "label": "Nom de votre agence", "value": "Agence Dupont" }
+    ]
+  }
+}
+
+Email de confirmation à envoyer via Resend :
+- From : "ImmoSaaS <onboarding@resend.dev>"
+- Subject : "Votre accès beta ImmoSaaS est réservé ✓"
+- Corps HTML :
+
+<!DOCTYPE html>
+<html>
+<body style="font-family: Arial, sans-serif; background: #080810; color: #ffffff; padding: 40px;">
+  <div style="max-width: 600px; margin: 0 auto;">
+    <h1 style="color: #38bdf8;">ImmoSaaS</h1>
+    <h2>Votre demande d'accès beta a bien été enregistrée.</h2>
+    <p>Notre équipe vous contactera dans les prochains jours pour finaliser votre accès et organiser votre session d'onboarding personnalisée.</p>
+    <div style="background: #0d0d14; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; margin: 24px 0;">
+      <p style="margin: 0; color: #38bdf8; font-weight: bold;">🎁 Ce qui vous attend :</p>
+      <ul style="margin-top: 12px;">
+        <li>1 mois d'accès offert (valeur 89€)</li>
+        <li>Onboarding personnalisé 1-to-1</li>
+        <li>Accès prioritaire aux nouvelles features</li>
+      </ul>
+    </div>
+    <p>En attendant, si vous avez des questions : <a href="mailto:contact@immosaas.fr" style="color: #38bdf8;">contact@immosaas.fr</a></p>
+    <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 40px;">ImmoSaaS © 2025 · La plateforme IA pour agences immobilières</p>
+  </div>
+</body>
+</html>
+
+CONTRAINTES :
+- Utilise le package resend (déjà installé)
+- RESEND_API_KEY depuis process.env
+- TypeScript strict
+- Gestion d'erreur explicite
+- Log console de chaque inscription reçue
