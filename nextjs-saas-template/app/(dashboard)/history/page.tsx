@@ -55,11 +55,10 @@ export default function HistoryPage() {
       </div>
 
       {/* Stats rapides */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 gap-4">
         {[
           { label: "Actions ce mois", value: String(MOCK_HISTORY.length) },
           { label: "Tokens consommés", value: totalTokens.toLocaleString("fr-FR") },
-          { label: "Modèle utilisé", value: "GPT-4o mini" },
         ].map((s) => (
           <div key={s.label} className="rounded-xl border border-white/[0.06] bg-[#0d0d14] px-5 py-4">
             <p className="text-[11px] font-medium uppercase tracking-wide text-white/30">{s.label}</p>
@@ -73,7 +72,7 @@ export default function HistoryPage() {
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/[0.06]">
-              {["Action", "Détail", "Tokens", "Modèle", "Date"].map((h) => (
+              {["Action", "Détail", "Tokens", "Date"].map((h) => (
                 <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-white/30">
                   {h}
                 </th>
@@ -94,7 +93,6 @@ export default function HistoryPage() {
                 <td className="px-5 py-3.5 text-[13px] tabular-nums text-white/50">
                   {entry.tokens_used.toLocaleString("fr-FR")}
                 </td>
-                <td className="px-5 py-3.5 text-[13px] text-white/30">{entry.model}</td>
                 <td className="px-5 py-3.5 text-[13px] text-white/30">{formatDate(entry.created_at)}</td>
               </tr>
             ))}
