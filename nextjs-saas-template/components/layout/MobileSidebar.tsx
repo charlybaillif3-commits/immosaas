@@ -57,7 +57,7 @@ export default function MobileSidebar() {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/15">
               <IconSparkles className="w-4 h-4 text-sky-400" aria-hidden />
             </div>
-            <span className="text-[15px] font-semibold tracking-tight text-white">Orial</span>
+            <span className="text-[15px] font-semibold tracking-tight text-white">Propstack</span>
           </div>
           <button
             type="button"

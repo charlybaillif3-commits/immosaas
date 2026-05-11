@@ -21,7 +21,7 @@ function buildEmailHtml(nomAgence: string): string {
 <html>
 <body style="font-family: Arial, sans-serif; background: #080810; color: #ffffff; padding: 40px;">
   <div style="max-width: 600px; margin: 0 auto;">
-    <h1 style="color: #38bdf8;">Orial</h1>
+    <h1 style="color: #38bdf8;">Propstack</h1>
     <h2>Votre demande d'accès beta a bien été enregistrée.</h2>
     <p>Bonjour${nomAgence ? ` — ${nomAgence}` : ""},</p>
     <p>Notre équipe vous contactera dans les prochains jours pour finaliser votre accès et organiser votre session d'onboarding personnalisée.</p>
@@ -33,8 +33,8 @@ function buildEmailHtml(nomAgence: string): string {
         <li>Accès prioritaire aux nouvelles features</li>
       </ul>
     </div>
-    <p>En attendant, si vous avez des questions : <a href="mailto:contact@immosaas.fr" style="color: #38bdf8;">contact@immosaas.fr</a></p>
-    <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 40px;">Orial © 2025 · La plateforme IA pour agences immobilières</p>
+    <p>En attendant, si vous avez des questions : <a href="mailto:contact@propstack.fr" style="color: #38bdf8;">contact@propstack.fr</a></p>
+    <p style="color: rgba(255,255,255,0.4); font-size: 12px; margin-top: 40px;">Propstack © 2025 · La plateforme IA pour agences immobilières</p>
   </div>
 </body>
 </html>`;
@@ -76,9 +76,9 @@ export async function POST(req: NextRequest): Promise<NextResponse> {
   const resend = new Resend(apiKey);
 
   const { error } = await resend.emails.send({
-    from:    "Orial <onboarding@resend.dev>",
+    from:    "Propstack <onboarding@resend.dev>",
     to:      [email],
-    subject: "Votre accès beta Orial est réservé ✓",
+    subject: "Votre accès beta Propstack est réservé ✓",
     html:    buildEmailHtml(nomAgence),
   });
 

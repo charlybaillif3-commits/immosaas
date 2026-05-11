@@ -6,8 +6,8 @@ import './globals.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Orial — Génération d\'annonces IA',
-  description: 'Plateforme SaaS pour agences immobilières',
+  title: 'Propstack — Génération d\'annonces IA pour agences immobilières',
+  description: 'La plateforme IA pour agences immobilières. Annonces professionnelles et analyse de marché.',
 }
 
 export default function RootLayout({

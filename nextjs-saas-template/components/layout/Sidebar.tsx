@@ -29,7 +29,7 @@ export default function Sidebar() {
           <IconSparkles className="w-4 h-4 text-sky-400" aria-hidden />
         </div>
         <span className="text-[15px] font-semibold tracking-tight text-white">
-          Orial
+          Propstack
         </span>
       </div>
 

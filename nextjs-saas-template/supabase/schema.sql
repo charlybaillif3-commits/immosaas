@@ -1,5 +1,5 @@
 -- ============================================================================
--- Orial — Schéma Supabase complet
+-- Propstack — Schéma Supabase complet
 -- Stack : Next.js 14 + Clerk (auth) + Supabase (DB uniquement)
 --
 -- Instructions :
@@ -292,7 +292,7 @@ create trigger trg_subscriptions_updated_at
 insert into public.profiles (id, email, full_name, role, is_active)
 values (
   'user_test_owner_001',
-  'owner@immo-saas.fr',
+  'owner@propstack.fr',
   'Jean Dupont',
   'owner',
   true
