@@ -60,20 +60,20 @@ export default function HistoryPage() {
           { label: "Actions ce mois", value: String(MOCK_HISTORY.length) },
           { label: "Tokens consommés", value: totalTokens.toLocaleString("fr-FR") },
         ].map((s) => (
-          <div key={s.label} className="rounded-xl border border-white/[0.06] bg-[#0d0d14] px-5 py-4">
-            <p className="text-[11px] font-medium uppercase tracking-wide text-white/30">{s.label}</p>
-            <p className="mt-1 text-xl font-semibold text-white">{s.value}</p>
+          <div key={s.label} className="rounded-xl border border-white/[0.06] bg-[#0f0f13] px-5 py-4">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30">{s.label}</p>
+            <p className="mt-1 text-xl font-bold text-white">{s.value}</p>
           </div>
         ))}
       </div>
 
       {/* Table */}
-      <div className="overflow-hidden rounded-xl border border-white/[0.06] bg-[#0d0d14]">
+      <div className="overflow-hidden rounded-xl border border-white/[0.06] bg-[#0f0f13]">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-white/[0.06]">
               {["Action", "Détail", "Tokens", "Date"].map((h) => (
-                <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-wide text-white/30">
+                <th key={h} className="px-5 py-3 text-left text-[11px] font-semibold uppercase tracking-widest text-white/25">
                   {h}
                 </th>
               ))}

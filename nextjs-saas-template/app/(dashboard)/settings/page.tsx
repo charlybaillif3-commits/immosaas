@@ -16,21 +16,21 @@ export default async function SettingsPage() {
       </div>
 
       {/* Profil */}
-      <section className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-6">
-        <h2 className="mb-5 text-sm font-semibold text-white/80">Profil utilisateur</h2>
+      <section className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-6">
+        <h2 className="mb-5 text-sm font-semibold text-white/70">Profil utilisateur</h2>
 
         <div className="flex items-center gap-4 mb-6">
           {user?.imageUrl ? (
             <img src={user.imageUrl} alt={fullName} className="h-14 w-14 rounded-full object-cover ring-2 ring-white/10" />
           ) : (
-            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-indigo-500/15 text-lg font-bold text-indigo-400 ring-2 ring-white/10">
+            <div className="flex h-14 w-14 items-center justify-center rounded-full bg-white/[0.08] text-lg font-bold text-white/70 ring-2 ring-white/10">
               {fullName.charAt(0).toUpperCase()}
             </div>
           )}
           <div>
             <p className="text-sm font-medium text-white/80">{fullName || "—"}</p>
             <p className="text-xs text-white/35">{email}</p>
-            <p className="mt-1 text-[11px] text-indigo-400/70">
+            <p className="mt-1 text-[11px] text-white/30">
               Gérez votre avatar et mot de passe sur Clerk →
             </p>
           </div>
@@ -43,7 +43,7 @@ export default async function SettingsPage() {
             { label: "Email",  value: email,                placeholder: "", type: "email" },
           ].map((field) => (
             <div key={field.label} className={field.label === "Email" ? "sm:col-span-2" : ""}>
-              <label className="mb-1.5 block text-xs font-medium text-white/40">
+              <label className="mb-1.5 block text-xs font-medium text-white/35">
                 {field.label}
               </label>
               <input
@@ -51,7 +51,7 @@ export default async function SettingsPage() {
                 defaultValue={field.value}
                 placeholder={field.placeholder}
                 readOnly={field.label === "Email"}
-                className="input read-only:opacity-50 read-only:cursor-not-allowed"
+                className="input read-only:opacity-40 read-only:cursor-not-allowed"
               />
             </div>
           ))}
@@ -65,12 +65,12 @@ export default async function SettingsPage() {
       </section>
 
       {/* Préférences agence */}
-      <section className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-6">
-        <h2 className="mb-5 text-sm font-semibold text-white/80">Préférences de génération IA</h2>
+      <section className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-6">
+        <h2 className="mb-5 text-sm font-semibold text-white/70">Préférences de génération IA</h2>
 
         <div className="space-y-4">
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-white/40">
+            <label className="mb-1.5 block text-xs font-medium text-white/35">
               Ton par défaut des annonces
             </label>
             <select className="input">
@@ -81,7 +81,7 @@ export default async function SettingsPage() {
           </div>
 
           <div>
-            <label className="mb-1.5 block text-xs font-medium text-white/40">
+            <label className="mb-1.5 block text-xs font-medium text-white/35">
               Langue des annonces générées
             </label>
             <select className="input">
@@ -99,14 +99,14 @@ export default async function SettingsPage() {
       </section>
 
       {/* Danger zone */}
-      <section className="rounded-xl border border-red-500/10 bg-red-500/[0.03] p-6">
-        <h2 className="mb-2 text-sm font-semibold text-red-400/80">Zone de danger</h2>
-        <p className="mb-4 text-xs text-white/30">
+      <section className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-6">
+        <h2 className="mb-2 text-sm font-semibold text-white/40">Zone de danger</h2>
+        <p className="mb-4 text-xs text-white/25">
           La suppression de votre compte est irréversible. Toutes vos données seront perdues.
         </p>
         <button
           type="button"
-          className="rounded-lg border border-red-500/20 px-4 py-2 text-sm font-medium text-red-400/70 transition-colors hover:border-red-500/40 hover:text-red-400"
+          className="rounded-lg border border-white/[0.08] px-4 py-2 text-sm font-medium text-white/30 transition-colors hover:border-white/20 hover:text-white/50"
         >
           Supprimer mon compte
         </button>

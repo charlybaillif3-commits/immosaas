@@ -7,11 +7,11 @@ export default async function DashboardPage() {
   const user = await currentUser();
   const firstName = user?.firstName ?? "là";
 
-  const stats: Array<{ label: string; value: string; delta: string; up: boolean }> = [
-    { label: "Annonces actives",  value: "24",     delta: "+3 ce mois",   up: true  },
-    { label: "Vues totales",      value: "1 842",  delta: "+12% vs mois", up: true  },
-    { label: "Leads reçus",       value: "37",     delta: "+5 cette sem.", up: true  },
-    { label: "Crédits IA restants", value: "58",   delta: "42 utilisés",  up: false },
+  const stats: Array<{ label: string; value: string; delta: string }> = [
+    { label: "Annonces actives",    value: "24",     delta: "+3 ce mois"    },
+    { label: "Vues totales",        value: "1 842",  delta: "+12% vs mois"  },
+    { label: "Leads reçus",         value: "37",     delta: "+5 cette sem." },
+    { label: "Crédits IA restants", value: "58",     delta: "42 utilisés"   },
   ];
 
   return (
@@ -20,7 +20,7 @@ export default async function DashboardPage() {
       {/* En-tête */}
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-white">
-          Bonjour, {firstName} 👋
+          Bonjour, {firstName}
         </h1>
         <p className="mt-1 text-sm text-white/40">
           Voici un aperçu de votre activité aujourd&apos;hui.
@@ -30,17 +30,14 @@ export default async function DashboardPage() {
       {/* KPI Cards */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
         {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className="card-accent px-5 py-4"
-          >
+          <div key={stat.label} className="card-accent px-5 py-4">
             <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30">
               {stat.label}
             </p>
             <p className="mt-2 text-3xl font-bold text-white">
               {stat.value}
             </p>
-            <p className="mt-1 text-xs font-medium text-indigo-400">
+            <p className="mt-1 text-xs font-medium text-white/40">
               {stat.delta}
             </p>
           </div>
@@ -51,10 +48,10 @@ export default async function DashboardPage() {
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
 
         {/* Dernières annonces */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14]">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13]">
           <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
             <h2 className="text-sm font-semibold text-white/90">Annonces récentes</h2>
-            <a href="/listings" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+            <a href="/listings" className="text-xs text-white/40 hover:text-white/80 transition-colors">
               Voir tout →
             </a>
           </div>
@@ -81,10 +78,10 @@ export default async function DashboardPage() {
         </div>
 
         {/* Activité IA */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14]">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13]">
           <div className="flex items-center justify-between border-b border-white/[0.06] px-5 py-4">
             <h2 className="text-sm font-semibold text-white/90">Activité IA récente</h2>
-            <a href="/history" className="text-xs text-indigo-400 hover:text-indigo-300 transition-colors">
+            <a href="/history" className="text-xs text-white/40 hover:text-white/80 transition-colors">
               Historique →
             </a>
           </div>
@@ -95,8 +92,10 @@ export default async function DashboardPage() {
               { action: "Annonce générée",    detail: "Maison Lyon 6e",         tokens: "395 tokens", ago: "Hier"       },
             ].map((item) => (
               <div key={`${item.action}-${item.ago}`} className="flex items-start gap-3 px-5 py-3.5">
-                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-indigo-500/10">
-                  <span className="text-[10px] text-indigo-400">✦</span>
+                <div className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-white/[0.06]">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.75} className="w-3 h-3 text-white/40" aria-hidden>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
+                  </svg>
                 </div>
                 <div className="min-w-0 flex-1">
                   <p className="text-[13px] font-medium text-white/80">{item.action}</p>

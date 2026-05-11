@@ -57,7 +57,7 @@ type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 /* ── Constantes ─────────────────────────────────────────────────────── */
 
 const INPUT_CLS =
-  "w-full rounded-lg border border-white/10 bg-[#0d0d1a] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/20 transition-colors";
+  "w-full rounded-lg border border-white/10 bg-[#0f0f13] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/10 transition-colors";
 
 const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "apartment",  label: "Appartement" },
@@ -68,9 +68,9 @@ const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
 ];
 
 const LISTING_STYLES: Array<{ value: ListingStyle; label: string; desc: string }> = [
-  { value: "prestige",      label: "✦ Prestige",      desc: "Luxe & raffinement" },
-  { value: "standard",      label: "◆ Standard",      desc: "Clair & factuel" },
-  { value: "coup_de_coeur", label: "♥ Coup de cœur",  desc: "Émotion & storytelling" },
+  { value: "prestige",      label: "Prestige",      desc: "Luxe & raffinement" },
+  { value: "standard",      label: "Standard",      desc: "Clair & factuel" },
+  { value: "coup_de_coeur", label: "Coup de cœur",  desc: "Émotion & storytelling" },
 ];
 
 const INITIAL_FORM: FormValues = {
@@ -241,7 +241,7 @@ export default function GeneratorForm() {
   return (
     <div className="space-y-6">
       {apiError && (
-        <div className="rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3 text-sm text-red-400">
+        <div className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/60">
           <strong>Erreur :</strong> {apiError}
         </div>
       )}
@@ -259,14 +259,14 @@ export default function GeneratorForm() {
                 className={[
                   "flex flex-col items-center gap-0.5 rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
                   form.style === s.value
-                    ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-400"
+                    ? "border-white/25 bg-white/[0.08] text-white"
                     : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
                 ].join(" ")}
               >
                 <span className="text-[13px] font-semibold">{s.label}</span>
                 <span className={[
                   "text-[10px]",
-                  form.style === s.value ? "text-indigo-400/70" : "text-white/25",
+                  form.style === s.value ? "text-white/50" : "text-white/25",
                 ].join(" ")}>
                   {s.desc}
                 </span>
@@ -286,7 +286,7 @@ export default function GeneratorForm() {
                 className={[
                   "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
                   form.propertyType === pt.value
-                    ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-400"
+                    ? "border-white/25 bg-white/[0.08] text-white"
                     : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
                 ].join(" ")}
               >
@@ -422,7 +422,7 @@ function FieldGroup({ label, hint, required, className, children }: FieldGroupPr
     <div className={className}>
       <label className="mb-1.5 block text-xs font-medium text-white/50">
         {label}
-        {required && <span className="ml-0.5 text-indigo-400">*</span>}
+        {required && <span className="ml-0.5 text-white/40">*</span>}
       </label>
       {children}
       {hint && <p className="mt-1 text-[11px] text-white/25">{hint}</p>}
@@ -434,9 +434,9 @@ function GeneratingLoader() {
   return (
     <div className="flex flex-col items-center justify-center py-20 text-center">
       <div className="relative mb-5 h-12 w-12">
-        <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20" />
-        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-indigo-400" />
-        <SparkleIcon className="absolute inset-0 m-auto w-5 h-5 text-indigo-400" />
+        <div className="absolute inset-0 rounded-full border-2 border-white/[0.08]" />
+        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-white/60" />
+        <SparkleIcon className="absolute inset-0 m-auto w-5 h-5 text-white/50" />
       </div>
       <p className="text-base font-medium text-white/80">Rédaction de votre annonce en cours…</p>
       <p className="mt-1 text-sm text-white/35">Génération du titre, de la description et des points forts</p>
@@ -468,9 +468,8 @@ function Preview({
   return (
     <div className="space-y-6 animate-fade-in">
       {/* Badge succès */}
-      <div className="flex items-center gap-2 rounded-lg border border-emerald-500/20 bg-emerald-500/[0.06] px-4 py-3">
-        <span className="text-emerald-400">✦</span>
-        <p className="text-sm text-emerald-400/90">
+      <div className="flex items-center gap-2 rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+        <p className="text-sm text-white/60">
           Annonce générée avec succès — relisez et corrigez si nécessaire avant d&apos;enregistrer.
         </p>
       </div>
@@ -506,8 +505,8 @@ function Preview({
         <p className="mb-3 text-xs font-medium text-white/50">5 points forts générés</p>
         <ul className="space-y-2">
           {generated.points_forts.map((point, i) => (
-            <li key={i} className="flex items-start gap-3 text-sm text-white/70">
-              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/15 text-[10px] font-bold text-indigo-400">
+            <li key={i} className="flex items-start gap-3 text-sm text-white/60">
+              <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/[0.08] text-[10px] font-bold text-white/50">
                 {i + 1}
               </span>
               {point}
@@ -531,7 +530,7 @@ function Preview({
           type="button"
           onClick={onSave}
           disabled={isSaving}
-          className="flex items-center gap-2 rounded-lg bg-indigo-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex items-center gap-2 rounded-lg bg-white px-6 py-2.5 text-sm font-semibold text-black transition-all hover:bg-white/90 disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {isSaving ? (
             <>

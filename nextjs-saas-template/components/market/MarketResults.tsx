@@ -2,13 +2,6 @@
 
 import type { MarketAnalysis } from "@/app/api/market/analyze/route";
 
-/**
- * components/market/MarketResults.tsx
- *
- * Affichage des résultats de l'analyse de marché IA.
- * Reçoit un MarketAnalysis en props et le présente visuellement.
- */
-
 interface Props {
   analysis:  MarketAnalysis;
   location:  string;
@@ -17,22 +10,10 @@ interface Props {
 }
 
 const TENDANCE_CONFIG = {
-  haussiere: { label: "Haussière",  icon: "↑", cls: "bg-emerald-500/10 text-emerald-400 border-emerald-500/20" },
-  stable:    { label: "Stable",     icon: "→", cls: "bg-amber-500/10   text-amber-400   border-amber-500/20"   },
-  baissiere: { label: "Baissière",  icon: "↓", cls: "bg-red-500/10     text-red-400     border-red-500/20"     },
+  haussiere: { label: "Haussière",  icon: "↑", cls: "bg-white/[0.08] text-white/80 border-white/10" },
+  stable:    { label: "Stable",     icon: "→", cls: "bg-white/[0.06] text-white/50 border-white/10" },
+  baissiere: { label: "Baissière",  icon: "↓", cls: "bg-white/[0.04] text-white/30 border-white/[0.06]" },
 } as const;
-
-function scoreColor(score: number): string {
-  if (score >= 8) return "text-emerald-400";
-  if (score >= 5) return "text-amber-400";
-  return "text-red-400";
-}
-
-function scoreBarColor(score: number): string {
-  if (score >= 8) return "bg-emerald-500";
-  if (score >= 5) return "bg-amber-500";
-  return "bg-red-500";
-}
 
 function formatPrice(n: number): string {
   return new Intl.NumberFormat("fr-FR", {
@@ -49,15 +30,12 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
     <div className="space-y-6 animate-[fadeIn_0.3s_ease]">
 
       {/* Badge succès + contexte */}
-      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-emerald-500/20 bg-emerald-500/[0.05] px-4 py-3">
-        <div className="flex items-center gap-2">
-          <span className="text-emerald-400">✦</span>
-          <p className="text-sm text-emerald-400/90">
-            Analyse —{" "}
-            <span className="font-medium">{location}</span>
-            {" · "}{typeLabel}
-          </p>
-        </div>
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-white/[0.08] bg-white/[0.03] px-4 py-3">
+        <p className="text-sm text-white/70">
+          Analyse —{" "}
+          <span className="font-medium text-white">{location}</span>
+          {" · "}{typeLabel}
+        </p>
         <button
           type="button"
           onClick={onReset}
@@ -71,26 +49,25 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
 
         {/* Score marché */}
-        <div className="col-span-2 rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5 lg:col-span-1">
-          <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-white/30">
+        <div className="col-span-2 rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5 lg:col-span-1">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-widest text-white/25">
             Score marché
           </p>
-          <p className="text-5xl font-bold tabular-nums text-indigo-400">
+          <p className="text-5xl font-bold tabular-nums text-white">
             {analysis.score_marche}
             <span className="text-xl text-white/20">/10</span>
           </p>
-          {/* Barre de score */}
           <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
             <div
-              className="h-full rounded-full bg-indigo-500 transition-all"
+              className="h-full rounded-full bg-white/50 transition-all"
               style={{ width: `${analysis.score_marche * 10}%` }}
             />
           </div>
         </div>
 
         {/* Prix médian m² */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-white/30">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-white/25">
             Prix médian / m²
           </p>
           <p className="text-2xl font-bold text-white">
@@ -100,8 +77,8 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
         </div>
 
         {/* Tendance */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
-          <p className="mb-2 text-[11px] font-semibold uppercase tracking-wide text-white/30">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
+          <p className="mb-2 text-[11px] font-semibold uppercase tracking-widest text-white/25">
             Tendance
           </p>
           <span className={[
@@ -114,8 +91,8 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
         </div>
 
         {/* Délai de vente */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
-          <p className="mb-1 text-[11px] font-semibold uppercase tracking-wide text-white/30">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
+          <p className="mb-1 text-[11px] font-semibold uppercase tracking-widest text-white/25">
             Délai vente moyen
           </p>
           <p className="text-xl font-bold text-white">
@@ -128,10 +105,9 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
       {/* Recommandations pricing + Arguments de vente */}
       <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
 
-        {/* Recommandations pricing */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
           <div className="mb-4 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-indigo-500/10 text-xs text-indigo-400">
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/[0.06] text-xs text-white/50">
               €
             </span>
             <h3 className="text-sm font-semibold text-white/80">Stratégie de prix</h3>
@@ -139,7 +115,7 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
           <ol className="space-y-3">
             {analysis.recommandations_pricing.map((rec, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-white/60">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-indigo-500/10 text-[10px] font-bold text-indigo-400">
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/[0.06] text-[10px] font-bold text-white/50">
                   {i + 1}
                 </span>
                 {rec}
@@ -148,19 +124,18 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
           </ol>
         </div>
 
-        {/* Arguments de vente */}
-        <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
+        <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
           <div className="mb-4 flex items-center gap-2">
-            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-500/10 text-xs text-emerald-400">
-              ✓
+            <span className="flex h-6 w-6 items-center justify-center rounded-md bg-white/[0.06] text-xs text-white/50">
+              +
             </span>
             <h3 className="text-sm font-semibold text-white/80">Arguments de vente</h3>
           </div>
           <ul className="space-y-3">
             {analysis.arguments_vente.map((arg, i) => (
               <li key={i} className="flex items-start gap-3 text-sm text-white/60">
-                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-500/10 text-[10px] text-emerald-400">
-                  ✓
+                <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-white/[0.06] text-[10px] text-white/40">
+                  –
                 </span>
                 {arg}
               </li>
@@ -170,9 +145,9 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
       </div>
 
       {/* Synthèse */}
-      <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-5">
+      <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-5">
         <div className="mb-3 flex items-center gap-2">
-          <SparkleIcon className="h-4 w-4 text-indigo-400" />
+          <SparkleIcon className="h-4 w-4 text-white/40" />
           <h3 className="text-sm font-semibold text-white/80">Synthèse du marché</h3>
         </div>
         <p className="text-sm leading-relaxed text-white/55">

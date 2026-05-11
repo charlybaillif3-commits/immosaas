@@ -39,7 +39,7 @@ type ApiResponse = ApiSuccess | ApiError;
 /* ── Constantes ─────────────────────────────────────────────────────── */
 
 const INPUT_CLS =
-  "w-full rounded-lg border border-white/[0.08] bg-[#0d0d1a] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/20 transition-colors";
+  "w-full rounded-lg border border-white/[0.08] bg-[#0f0f13] px-3.5 py-2.5 text-sm text-white placeholder:text-white/25 focus:border-white/30 focus:outline-none focus:ring-1 focus:ring-white/10 transition-colors";
 
 const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "apartment",  label: "Appartement" },
@@ -164,7 +164,7 @@ export default function MarketAnalyzerForm() {
   return (
     <div className="space-y-6">
       {apiError && (
-        <div className="rounded-lg border border-red-500/20 bg-red-500/[0.06] px-4 py-3 text-sm text-red-400">
+        <div className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-4 py-3 text-sm text-white/60">
           <strong>Erreur :</strong> {apiError}
         </div>
       )}
@@ -209,7 +209,7 @@ export default function MarketAnalyzerForm() {
                 className={[
                   "rounded-lg border px-3 py-2.5 text-sm font-medium transition-all",
                   form.property_type === pt.value
-                    ? "border-indigo-500/60 bg-indigo-500/10 text-indigo-400"
+                    ? "border-white/25 bg-white/[0.08] text-white"
                     : "border-white/[0.08] bg-white/[0.02] text-white/50 hover:border-white/20 hover:text-white/80",
                 ].join(" ")}
               >
@@ -277,7 +277,7 @@ function FieldGroup({ label, hint, required, children }: FieldGroupProps) {
     <div>
       <label className="mb-1.5 block text-xs font-medium text-white/50">
         {label}
-        {required && <span className="ml-0.5 text-indigo-400">*</span>}
+        {required && <span className="ml-0.5 text-white/40">*</span>}
       </label>
       {children}
       {hint && <p className="mt-1 text-[11px] text-white/25">{hint}</p>}
@@ -289,12 +289,12 @@ function AnalyzingLoader({ city }: { city: string }) {
   return (
     <div className="flex flex-col items-center justify-center py-24 text-center">
       <div className="relative mb-5 h-14 w-14">
-        <div className="absolute inset-0 rounded-full border-2 border-indigo-500/20" />
-        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-indigo-400" />
-        <SparkleIcon className="absolute inset-0 m-auto h-5 w-5 text-indigo-400" />
+        <div className="absolute inset-0 rounded-full border-2 border-white/[0.08]" />
+        <div className="absolute inset-0 animate-spin rounded-full border-2 border-transparent border-t-white/60" />
+        <SparkleIcon className="absolute inset-0 m-auto h-5 w-5 text-white/50" />
       </div>
       <p className="text-base font-medium text-white/80">
-        Analyse du marché de <span className="text-indigo-400">{city}</span>…
+        Analyse du marché de <span className="text-white">{city}</span>…
       </p>
       <p className="mt-1 text-sm text-white/30">
         Score, prix médian, tendance, recommandations…

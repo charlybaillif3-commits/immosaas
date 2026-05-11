@@ -72,15 +72,13 @@ export default function BillingPage() {
       </div>
 
       {/* Abonnement actif */}
-      <div className="rounded-xl border border-white/[0.06] bg-[#0d0d14] p-6">
+      <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-6">
         <div className="flex items-start justify-between">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wide text-white/30">Plan actuel</p>
+            <p className="text-xs font-semibold uppercase tracking-widest text-white/25">Plan actuel</p>
             <div className="mt-2 flex items-center gap-3">
               <p className="text-xl font-semibold text-white">Pro</p>
-              <span className="rounded-full bg-emerald-500/10 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400">
-                Actif
-              </span>
+              <span className="badge">Actif</span>
             </div>
             <p className="mt-1 text-sm text-white/40">
               Prochain renouvellement le <strong className="text-white/60">1 juin 2026</strong> · 99 €
@@ -88,7 +86,7 @@ export default function BillingPage() {
           </div>
           <button
             type="button"
-            className="rounded-lg border border-white/[0.08] px-4 py-2 text-sm font-medium text-white/60 transition-colors hover:bg-white/[0.05] hover:text-white/90"
+            className="rounded-lg border border-white/[0.08] px-4 py-2 text-sm font-medium text-white/50 transition-colors hover:bg-white/[0.05] hover:text-white/90"
           >
             Gérer sur Stripe →
           </button>
@@ -97,9 +95,9 @@ export default function BillingPage() {
         {/* Usage */}
         <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-5 sm:grid-cols-3">
           {[
-            { label: "Annonces IA",    used: 42, total: 100 },
-            { label: "Analyses marché", used: 8, total: 999 },
-            { label: "Utilisateurs",   used: 3,  total: 5   },
+            { label: "Annonces IA",     used: 42, total: 100 },
+            { label: "Analyses marché", used: 8,  total: 999 },
+            { label: "Utilisateurs",    used: 3,  total: 5   },
           ].map((item) => {
             const pct = Math.min(Math.round((item.used / (item.total === 999 ? item.used + 10 : item.total)) * 100), 100);
             return (
@@ -112,7 +110,7 @@ export default function BillingPage() {
                 </div>
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
                   <div
-                    className={["h-full rounded-full", pct > 80 ? "bg-amber-400" : "bg-indigo-500"].join(" ")}
+                    className="h-full rounded-full bg-white/40"
                     style={{ width: `${pct}%` }}
                   />
                 </div>
@@ -134,12 +132,12 @@ export default function BillingPage() {
                 className={[
                   "relative flex flex-col rounded-xl border p-6 transition-colors",
                   plan.highlight
-                    ? "border-indigo-500/50 bg-indigo-500/[0.04]"
-                    : "border-white/[0.06] bg-[#0d0d14]",
+                    ? "border-white/20 bg-white/[0.03]"
+                    : "border-white/[0.06] bg-[#0f0f13]",
                 ].join(" ")}
               >
                 {plan.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-indigo">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 badge">
                     Populaire
                   </span>
                 )}
@@ -156,7 +154,7 @@ export default function BillingPage() {
                 <ul className="mb-6 flex-1 space-y-2">
                   {plan.features.map((f) => (
                     <li key={f} className="flex items-start gap-2 text-[13px] text-white/50">
-                      <span className="mt-0.5 text-indigo-400">✓</span>
+                      <span className="mt-0.5 text-white/30">–</span>
                       {f}
                     </li>
                   ))}
@@ -168,7 +166,7 @@ export default function BillingPage() {
                   className={[
                     "w-full",
                     isCurrent
-                      ? "rounded-lg cursor-default bg-white/[0.04] text-white/25 px-4 py-2.5 text-sm"
+                      ? "rounded-lg cursor-default bg-white/[0.04] text-white/20 px-4 py-2.5 text-sm"
                       : plan.highlight
                         ? "btn-primary"
                         : "btn-secondary",
