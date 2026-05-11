@@ -75,14 +75,14 @@ export default function MarketResults({ analysis, location, typeLabel, onReset }
           <p className="mb-3 text-[11px] font-semibold uppercase tracking-wide text-white/30">
             Score marché
           </p>
-          <p className={["text-5xl font-black tabular-nums", scoreColor(analysis.score_marche)].join(" ")}>
+          <p className="text-5xl font-bold tabular-nums text-indigo-400">
             {analysis.score_marche}
             <span className="text-xl text-white/20">/10</span>
           </p>
           {/* Barre de score */}
           <div className="mt-3 h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
             <div
-              className={["h-full rounded-full transition-all", scoreBarColor(analysis.score_marche)].join(" ")}
+              className="h-full rounded-full bg-indigo-500 transition-all"
               style={{ width: `${analysis.score_marche * 10}%` }}
             />
           </div>

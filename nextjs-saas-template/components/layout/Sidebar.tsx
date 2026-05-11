@@ -21,7 +21,7 @@ export default function Sidebar() {
   }
 
   return (
-    <aside className="flex w-64 flex-col bg-[#0d0d14] border-r border-white/[0.06]">
+    <aside className="flex w-64 flex-col bg-[#080810] border-r border-white/[0.06]">
 
       {/* Logo */}
       <div className="flex h-16 shrink-0 items-center gap-2.5 border-b border-white/[0.06] px-5">

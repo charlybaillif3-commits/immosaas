@@ -32,15 +32,15 @@ export default async function DashboardPage() {
         {stats.map((stat) => (
           <div
             key={stat.label}
-            className="rounded-xl border border-white/[0.06] bg-[#0d0d14] px-5 py-4"
+            className="card-accent px-5 py-4"
           >
-            <p className="text-xs font-medium text-white/40 uppercase tracking-wide">
+            <p className="text-[11px] font-semibold uppercase tracking-widest text-white/30">
               {stat.label}
             </p>
-            <p className="mt-2 text-3xl font-semibold tracking-tight text-white">
+            <p className="mt-2 text-3xl font-bold text-white">
               {stat.value}
             </p>
-            <p className={["mt-1 text-xs font-medium", stat.up ? "text-emerald-400" : "text-white/30"].join(" ")}>
+            <p className="mt-1 text-xs font-medium text-indigo-400">
               {stat.delta}
             </p>
           </div>
@@ -70,10 +70,8 @@ export default async function DashboardPage() {
                   <p className="text-[11px] text-white/35">{item.price}</p>
                 </div>
                 <span className={[
-                  "ml-3 shrink-0 rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide",
-                  item.status === "active"
-                    ? "bg-emerald-500/10 text-emerald-400"
-                    : "bg-white/[0.06] text-white/35",
+                  "ml-3 shrink-0 badge",
+                  item.status === "active" ? "badge-green" : "badge-gray",
                 ].join(" ")}>
                   {item.status === "active" ? "Active" : "Brouillon"}
                 </span>

@@ -20,9 +20,9 @@ const ACTION_LABELS: Record<ActionType, string> = {
 };
 
 const ACTION_COLORS: Record<ActionType, string> = {
-  generate_listing:     "bg-indigo-500/10 text-indigo-400",
-  analyze_market:       "bg-violet-500/10 text-violet-400",
-  generate_description: "bg-emerald-500/10 text-emerald-400",
+  generate_listing:     "badge-indigo",
+  analyze_market:       "badge-indigo",
+  generate_description: "badge-green",
 };
 
 const MOCK_HISTORY: HistoryEntry[] = [
@@ -83,7 +83,7 @@ export default function HistoryPage() {
             {MOCK_HISTORY.map((entry) => (
               <tr key={entry.id} className="transition-colors hover:bg-white/[0.02]">
                 <td className="px-5 py-3.5">
-                  <span className={["rounded-full px-2.5 py-1 text-[11px] font-semibold", ACTION_COLORS[entry.action_type]].join(" ")}>
+                  <span className={["badge", ACTION_COLORS[entry.action_type]].join(" ")}>
                     {ACTION_LABELS[entry.action_type]}
                   </span>
                 </td>

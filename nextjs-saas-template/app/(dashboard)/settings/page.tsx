@@ -51,17 +51,14 @@ export default async function SettingsPage() {
                 defaultValue={field.value}
                 placeholder={field.placeholder}
                 readOnly={field.label === "Email"}
-                className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 placeholder:text-white/20 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 read-only:opacity-50 read-only:cursor-not-allowed transition-colors"
+                className="input read-only:opacity-50 read-only:cursor-not-allowed"
               />
             </div>
           ))}
         </div>
 
         <div className="mt-5 flex justify-end">
-          <button
-            type="button"
-            className="rounded-lg bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-400"
-          >
+          <button type="button" className="btn-primary">
             Enregistrer
           </button>
         </div>
@@ -76,7 +73,7 @@ export default async function SettingsPage() {
             <label className="mb-1.5 block text-xs font-medium text-white/40">
               Ton par défaut des annonces
             </label>
-            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors">
+            <select className="input">
               <option value="professional">Professionnel</option>
               <option value="friendly">Chaleureux</option>
               <option value="luxury">Luxe / Prestige</option>
@@ -87,7 +84,7 @@ export default async function SettingsPage() {
             <label className="mb-1.5 block text-xs font-medium text-white/40">
               Langue des annonces générées
             </label>
-            <select className="w-full rounded-lg border border-white/[0.08] bg-white/[0.03] px-3.5 py-2.5 text-sm text-white/70 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors">
+            <select className="input">
               <option value="fr">Français</option>
               <option value="en">English</option>
             </select>
@@ -95,10 +92,7 @@ export default async function SettingsPage() {
         </div>
 
         <div className="mt-5 flex justify-end">
-          <button
-            type="button"
-            className="rounded-lg bg-indigo-500 px-5 py-2 text-sm font-medium text-white transition-colors hover:bg-indigo-400"
-          >
+          <button type="button" className="btn-primary">
             Enregistrer
           </button>
         </div>

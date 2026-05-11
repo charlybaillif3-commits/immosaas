@@ -1,0 +1,126 @@
+Refonte UI complète du projet nextjs-saas-template.
+Le design doit être identique à notre landing page Propstack.
+
+COULEURS IMPOSÉES — aucune dérogation :
+- Fond global : #080810
+- Fond cards/panels : #0d0d1a  
+- Accent : #6366f1 (indigo)
+- Accent hover : #4f46e5
+- Texte primaire : rgba(255,255,255,0.9)
+- Texte secondaire : rgba(255,255,255,0.5)
+- Bordures : rgba(255,255,255,0.06)
+- Bordure focus inputs : rgba(99,102,241,0.5)
+
+TYPOGRAPHIE :
+- Font : Inter (déjà installée)
+- Titres : font-bold, tracking-tight
+- Corps : font-normal
+- Labels : text-xs uppercase tracking-widest
+
+COMPOSANTS À REFAIRE :
+
+1. app/globals.css — remplace tout par :
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #080810; color: rgba(255,255,255,0.9); }
+}
+
+@layer components {
+  .card { background: #0d0d1a; border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; }
+  .card-accent { background: #0d0d1a; border: 1px solid rgba(255,255,255,0.06); border-top: 2px solid #6366f1; border-radius: 12px; }
+  .input { background: #0d0d1a; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); border-radius: 8px; padding: 10px 14px; width: 100%; }
+  .input:focus { outline: none; border-color: rgba(99,102,241,0.5); }
+  .btn-primary { background: #6366f1; color: white; font-weight: 600; border-radius: 10px; padding: 10px 20px; }
+  .btn-primary:hover { background: #4f46e5; }
+  .btn-secondary { background: transparent; border: 1px solid rgba(255,255,255,0.1); color: rgba(255,255,255,0.7); border-radius: 10px; padding: 10px 20px; }
+  .badge { border-radius: 6px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+  .badge-indigo { background: rgba(99,102,241,0.15); color: #818cf8; }
+  .badge-green { background: rgba(16,185,129,0.15); color: #34d399; }
+  .badge-gray { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.5); }
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+.animate-fadeIn { animation: fadeIn 0.3s ease forwards; }
+
+2. components/layout/Sidebar.tsx :
+- Fond : bg-[#080810]
+- Bordure : border-r border-white/[0.06]
+- Logo : text-white font-bold
+- Icône logo : bg-indigo-500/15, text-indigo-400
+- Liens inactifs : text-white/50 hover:bg-white/[0.04] hover:text-white/90
+- Lien actif : bg-indigo-500/10 text-indigo-400
+- Indicateur actif : bg-indigo-400
+- Badges nav : bg-indigo-500/15 text-indigo-400
+- Footer plan : bg-white/[0.03] border border-white/[0.06]
+- Barre crédits : bg-indigo-500
+
+3. components/layout/Topbar.tsx :
+- Fond : bg-[#080810]
+- Bordure : border-b border-white/[0.06]
+- Icônes : text-white/50 hover:text-white/90
+
+4. app/(dashboard)/dashboard/page.tsx :
+- Titre : text-white font-bold text-2xl
+- Stat cards : classe "card-accent" avec chiffre text-white font-bold text-3xl
+- Label : text-white/50 text-xs uppercase tracking-widest
+- Trend : text-indigo-400
+- Tables : bg-[#0d0d1a] border border-white/[0.06] rounded-xl
+- En-têtes table : text-white/40 text-xs uppercase
+- Lignes : border-b border-white/[0.04]
+- Badges : classes badge-indigo ou badge-gray
+
+5. components/listings/GeneratorForm.tsx :
+- Fond page : bg-[#080810]
+- Card formulaire : classe "card" p-8
+- Titre : text-white font-bold text-xl
+- Boutons type/style inactifs : bg-[#0d0d1a] border border-white/10 text-white/50 hover:border-white/20 hover:text-white/80
+- Boutons actifs : bg-indigo-500/10 border border-indigo-500/50 text-indigo-400
+- Inputs : classe "input"
+- Labels : text-white/60 text-sm font-medium
+- Bouton générer : classe "btn-primary" w-full py-3 text-base
+- Card résultat : bg-[#0d0d1a] border border-indigo-500/20 rounded-xl p-6
+- Titre résultat : text-white font-bold text-lg
+- Description : text-white/80
+- Points forts : text-white/70 avec bullet text-indigo-400
+
+6. components/market/MarketAnalyzerForm.tsx :
+- Même style que GeneratorForm
+- Inputs : classe "input"
+- Bouton analyser : classe "btn-primary"
+
+7. components/market/MarketResults.tsx :
+- Cards résultats : classe "card" 
+- Score : text-indigo-400 font-bold text-5xl
+- Barre score : bg-indigo-500
+- Badge haussière : badge-green
+- Badge stable : bg-amber-500/15 text-amber-400
+- Badge baissière : bg-red-500/15 text-red-400
+- Recommandations : numéros text-indigo-400
+- Arguments : bullets text-indigo-400
+
+8. app/(dashboard)/billing/page.tsx :
+- Cards plans : classe "card"
+- Plan Pro : border border-indigo-500/50
+- Badge populaire : badge-indigo
+- Boutons : btn-primary ou btn-secondary
+
+9. app/(dashboard)/settings/page.tsx :
+- Inputs : classe "input"
+- Bouton save : btn-primary
+
+10. app/(dashboard)/history/page.tsx :
+- Table : bg-[#0d0d1a] border border-white/[0.06] rounded-xl
+- Badges : badge-indigo, badge-green, badge-gray
+
+IMPORTANT :
+- Remplace TOUTES les classes sky-* par indigo-*
+- Remplace TOUS les fonds bg-white par bg-[#080810] ou bg-[#0d0d1a]
+- Remplace TOUS les textes text-gray-* par text-white/* approprié
+- Remplace TOUS les border-gray-* par border-white/[0.06]
+- Ne touche pas aux fichiers API, lib, types, middleware
+- Garde toute la logique existante
+- Uniquement le style

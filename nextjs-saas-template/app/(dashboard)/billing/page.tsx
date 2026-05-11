@@ -134,12 +134,12 @@ export default function BillingPage() {
                 className={[
                   "relative flex flex-col rounded-xl border p-6 transition-colors",
                   plan.highlight
-                    ? "border-indigo-500/30 bg-indigo-500/[0.04]"
+                    ? "border-indigo-500/50 bg-indigo-500/[0.04]"
                     : "border-white/[0.06] bg-[#0d0d14]",
                 ].join(" ")}
               >
                 {plan.highlight && (
-                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-indigo-500 px-3 py-0.5 text-[11px] font-semibold text-white">
+                  <span className="absolute -top-3 left-1/2 -translate-x-1/2 badge badge-indigo">
                     Populaire
                   </span>
                 )}
@@ -166,12 +166,12 @@ export default function BillingPage() {
                   type="button"
                   disabled={isCurrent}
                   className={[
-                    "w-full rounded-lg px-4 py-2.5 text-sm font-medium transition-colors",
+                    "w-full",
                     isCurrent
-                      ? "cursor-default bg-white/[0.04] text-white/25"
+                      ? "rounded-lg cursor-default bg-white/[0.04] text-white/25 px-4 py-2.5 text-sm"
                       : plan.highlight
-                        ? "bg-indigo-500 text-white hover:bg-indigo-400"
-                        : "border border-white/[0.08] text-white/60 hover:bg-white/[0.05] hover:text-white/90",
+                        ? "btn-primary"
+                        : "btn-secondary",
                   ].join(" ")}
                 >
                   {isCurrent ? "Plan actuel" : plan.id === "enterprise" ? "Nous contacter" : "Passer à ce plan"}

@@ -57,7 +57,7 @@ type ApiResponse = ApiSuccessResponse | ApiErrorResponse;
 /* ── Constantes ─────────────────────────────────────────────────────── */
 
 const INPUT_CLS =
-  "w-full rounded-lg border border-white/10 bg-[#1a1a2e] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-indigo-500/40 focus:outline-none focus:ring-1 focus:ring-indigo-500/30 transition-colors";
+  "w-full rounded-lg border border-white/10 bg-[#0d0d1a] px-3.5 py-2.5 text-sm text-white placeholder:text-white/30 focus:border-indigo-500/50 focus:outline-none focus:ring-1 focus:ring-indigo-500/20 transition-colors";
 
 const PROPERTY_TYPES: Array<{ value: PropertyType; label: string }> = [
   { value: "apartment",  label: "Appartement" },
@@ -393,10 +393,10 @@ export default function GeneratorForm() {
         </FieldGroup>
 
         {/* Bouton générer */}
-        <div className="flex justify-end pt-2">
+        <div className="pt-2">
           <button
             type="submit"
-            className="flex items-center gap-2 rounded-lg bg-indigo-500 px-6 py-2.5 text-sm font-semibold text-white shadow-lg shadow-indigo-500/20 transition-all hover:bg-indigo-400 hover:shadow-indigo-400/25 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/50"
+            className="btn-primary w-full py-3 text-base flex items-center justify-center gap-2"
           >
             <SparkleIcon />
             Générer
