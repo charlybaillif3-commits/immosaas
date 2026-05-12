@@ -116,7 +116,7 @@ export async function checkUsageLimit(
   const { count, error } = await supabase
     .from('ai_usage')
     .select('*', { count: 'exact', head: true })
-    .eq('user_id', userId)
+    .eq("agency_id", agencyId)
     .eq('feature', feature)
     .gte('created_at', startOfMonth);
 
