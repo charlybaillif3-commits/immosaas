@@ -63,12 +63,7 @@ export default async function LandingPage() {
 
         {/* Mockup hero */}
         <div className="relative mt-12 h-96 w-full overflow-hidden rounded-2xl border border-white/[0.06]">
-          <Image
-            src="/images/dashboard.png"
-            alt="Dashboard Propstack"
-            fill
-            className="object-cover rounded-xl"
-          />
+          <img src="/images/dashboard.png" alt="Dashboard Propstack" className="w-full h-full object-cover rounded-xl" />
         </div>
       </section>
 
@@ -125,13 +120,7 @@ export default async function LandingPage() {
               <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
               <p className="text-sm leading-relaxed text-white/50">{desc}</p>
               <div className="mt-4 overflow-hidden rounded-lg border border-white/[0.06]">
-                <Image
-                  src={img}
-                  alt={title}
-                  width={400}
-                  height={200}
-                  className="w-full object-cover"
-                />
+                <img src={img} alt={title} className="w-full h-auto object-cover" />
               </div>
             </div>
           ))}
