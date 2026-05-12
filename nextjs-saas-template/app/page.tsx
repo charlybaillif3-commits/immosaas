@@ -1,5 +1,6 @@
 import { auth } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
+import Image from "next/image";
 import WaitlistForm from "./_components/WaitlistForm";
 
 export default async function LandingPage() {
@@ -60,15 +61,14 @@ export default async function LandingPage() {
           </p>
         </div>
 
-        {/* Mockup placeholder */}
-        <div className="mt-12 h-96 w-full rounded-2xl border border-white/[0.06] bg-[#0f0f13]">
-          <div className="flex h-full items-center justify-center">
-            <div className="space-y-2 text-center">
-              <div className="mx-auto h-1.5 w-24 rounded-full bg-white/[0.08]" />
-              <div className="mx-auto h-1.5 w-16 rounded-full bg-white/[0.05]" />
-              <p className="mt-4 text-xs text-white/20">Aperçu de l&apos;interface</p>
-            </div>
-          </div>
+        {/* Mockup hero */}
+        <div className="relative mt-12 h-96 w-full overflow-hidden rounded-2xl border border-white/[0.06]">
+          <Image
+            src="/images/dashboard.png"
+            alt="Dashboard Propstack"
+            fill
+            className="object-cover rounded-xl"
+          />
         </div>
       </section>
 
@@ -99,21 +99,24 @@ export default async function LandingPage() {
         <div className="grid gap-6 md:grid-cols-3">
           {[
             {
-              icon: "✦",
+              icon:  "✦",
               title: "Génération d'annonces IA",
               desc:  "Prestige, Standard ou Coup de cœur. Rédigé en 10 secondes.",
+              img:   "/images/feature1.png",
             },
             {
-              icon: "↗",
+              icon:  "↗",
               title: "Analyse de marché instantanée",
               desc:  "Score /10, prix au m², tendance et recommandations.",
+              img:   "/images/feature2.png",
             },
             {
-              icon: "◎",
+              icon:  "◎",
               title: "Signez plus, rédigez moins",
               desc:  "2-3h économisées par mandat. Concentrez-vous sur vos clients.",
+              img:   "/images/feature3.png",
             },
-          ].map(({ icon, title, desc }) => (
+          ].map(({ icon, title, desc, img }) => (
             <div
               key={title}
               className="rounded-xl border border-white/[0.06] border-t-2 border-t-white bg-[#0f0f13] p-8"
@@ -121,6 +124,15 @@ export default async function LandingPage() {
               <p className="mb-4 text-xl text-white/40">{icon}</p>
               <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
               <p className="text-sm leading-relaxed text-white/50">{desc}</p>
+              <div className="mt-4 overflow-hidden rounded-lg border border-white/[0.06]">
+                <Image
+                  src={img}
+                  alt={title}
+                  width={400}
+                  height={200}
+                  className="w-full object-cover"
+                />
+              </div>
             </div>
           ))}
         </div>
