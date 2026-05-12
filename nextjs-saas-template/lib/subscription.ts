@@ -6,7 +6,7 @@ export type PlanId = 'starter' | 'pro' | 'scale';
 export type SubscriptionStatus = 'active' | 'canceled' | 'trialing' | 'past_due' | 'none';
 
 export interface Subscription {
-  user_id: string;
+  agency_id: string;
   stripe_customer_id: string | null;
   stripe_subscription_id: string | null;
   plan: PlanId;
@@ -38,15 +38,46 @@ export function getPlanLimits(plan: string): PlanLimits {
   return PLAN_LIMITS[plan as PlanId] ?? PLAN_LIMITS.starter;
 }
 
+/* ── Résolution agency_id ────────────────────────────────────────────── */
+
+async function getAgencyId(userId: string): Promise<string | null> {
+  const supabase = createAdminClient();
+
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('agency_id')
+    .eq('id', userId)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(`Failed to fetch profile: ${error.message}`);
+  }
+
+  return data?.agency_id ?? null;
+}
+
 /* ── Get subscription ────────────────────────────────────────────────── */
 
 export async function getUserSubscription(userId: string): Promise<Subscription> {
   const supabase = createAdminClient();
 
+  const agencyId = await getAgencyId(userId);
+
+  if (!agencyId) {
+    return {
+      agency_id:               '',
+      stripe_customer_id:      null,
+      stripe_subscription_id:  null,
+      plan:                    'starter',
+      status:                  'none',
+      current_period_end:      null,
+    };
+  }
+
   const { data, error } = await supabase
     .from('subscriptions')
     .select('*')
-    .eq('user_id', userId)
+    .eq('agency_id', agencyId)
     .maybeSingle();
 
   if (error) {
@@ -55,12 +86,12 @@ export async function getUserSubscription(userId: string): Promise<Subscription>
 
   if (!data) {
     return {
-      user_id: userId,
-      stripe_customer_id: null,
-      stripe_subscription_id: null,
-      plan: 'starter',
-      status: 'none',
-      current_period_end: null,
+      agency_id:               agencyId,
+      stripe_customer_id:      null,
+      stripe_subscription_id:  null,
+      plan:                    'starter',
+      status:                  'none',
+      current_period_end:      null,
     };
   }
 
