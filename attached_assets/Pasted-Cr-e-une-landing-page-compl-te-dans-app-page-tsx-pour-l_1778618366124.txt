@@ -1,0 +1,89 @@
+Crée une landing page complète dans app/page.tsx pour le SaaS Propstack.
+
+Design : dark mode premium, noir et blanc, style Linear/Vercel.
+Même design que le reste de l'app.
+
+PALETTE :
+- Fond : #080810
+- Cards : #0f0f13
+- Texte : #ffffff
+- Texte secondaire : rgba(255,255,255,0.5)
+- Bordures : rgba(255,255,255,0.06)
+- Boutons : bg-white text-black font-semibold
+- Zéro couleur : pas de bleu, indigo, vert, rouge
+
+SECTIONS :
+
+1. NAVBAR sticky :
+Logo "Propstack" blanc bold gauche
+Liens "Fonctionnalités" "Tarifs" "Beta" blanc/60 centre
+Bouton "Rejoindre la beta →" bg-white text-black droite
+Bordure bas rgba(255,255,255,0.06)
+Fond #080810
+
+2. HERO :
+Headline bold 72px blanc : "Générez des annonces qui vendent."
+Deuxième ligne blanc/60 : "Analysez votre marché en quelques secondes."
+Sous-titre blanc/50 18px : "La plateforme IA pour agences immobilières françaises."
+Bouton CTA : bg-white text-black font-bold px-8 py-4 rounded-xl
+Texte sous bouton blanc/30 : "47 agences inscrites · 1 mois offert aux 50 premiers"
+Grand placeholder mockup : bg-[#0f0f13] border border-white/[0.06] rounded-2xl h-96 w-full mt-12
+
+3. SOCIAL PROOF :
+Fond #0f0f13 bordure top/bottom rgba(255,255,255,0.06)
+3 stats bold blanc : "2x plus vite" · "3 styles d'annonces" · "30s analyse marché"
+Labels blanc/40
+
+4. FEATURES (id="fonctionnalites") :
+Titre blanc bold 40px : "Tout ce dont votre agence a besoin"
+3 cards bg-[#0f0f13] border border-white/[0.06] border-t-2 border-t-white rounded-xl p-8
+
+Card 1 : ✦ "Génération d'annonces IA"
+"Prestige, Standard ou Coup de cœur. Rédigé en 10 secondes."
+
+Card 2 : ↗ "Analyse de marché instantanée"
+"Score /10, prix au m², tendance et recommandations."
+
+Card 3 : ◎ "Signez plus, rédigez moins"
+"2-3h économisées par mandat. Concentrez-vous sur vos clients."
+
+5. PRICING (id="tarifs") :
+Titre blanc bold : "Tarifs simples, sans surprise"
+Sous-titre blanc/50 : "Prix beta — augmente au lancement officiel"
+
+2 plans :
+Starter 49€/mois : border border-white/[0.06] bg-[#0f0f13]
+- Badge "BETA" bg-white/[0.06] text-white/60
+- 50 annonces IA, 10 analyses marché, 1 utilisateur, Support email
+- Bouton border border-white/20 text-white
+
+Pro 89€/mois : border border-white bg-[#0f0f13]
+- Badge "POPULAIRE" bg-white text-black
+- Illimité, 5 utilisateurs, Support prioritaire, Onboarding 1-to-1
+- Bouton bg-white text-black
+
+6. WAITLIST (id="beta") :
+Fond #0f0f13 border border-white/[0.06] rounded-2xl p-12
+Titre blanc bold 32px : "Réservez votre accès beta"
+Sous-titre blanc/50 : "Les 50 premières agences obtiennent 1 mois offert"
+Form avec :
+- Input email : bg-[#080810] border border-white/10 text-white placeholder blanc/30 rounded-xl
+- Input agence : même style
+- Bouton submit : bg-white text-black font-bold rounded-xl "Réserver ma place →"
+- Texte blanc/30 : "Sans engagement · Pas de carte bancaire requise"
+Le formulaire POST vers /api/waitlist
+
+7. FOOTER :
+Fond #080810 border-t border-white/[0.06]
+Logo "Propstack" blanc gauche
+"© 2025 Propstack" blanc/30 centre
+Liens "CGU" "Confidentialité" blanc/30 droite
+
+CONTRAINTES :
+- Next.js 14 App Router, TypeScript, Tailwind CSS
+- Pas de 'use client' — Server Component pur
+- Responsive mobile
+- Animations : opacity-0 → opacity-100 au chargement
+- Le lien "Rejoindre la beta" scroll vers #beta
+- Pas de library externe
+- Le middleware Clerk doit laisser passer "/" comme route publique
