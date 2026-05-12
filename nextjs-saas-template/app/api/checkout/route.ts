@@ -2,7 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { auth } from '@clerk/nextjs/server';
 import { stripe } from '@/lib/stripe';
 import { createAdminClient } from '@/lib/supabase/admin';
-import type { PlanId } from '@/lib/subscription';
+
+type PlanId = 'starter' | 'pro' | 'scale';
 
 /* ── Plan → Price ID map ─────────────────────────────────────────────── */
 

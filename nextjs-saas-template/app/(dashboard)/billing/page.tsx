@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { auth } from "@clerk/nextjs/server";
-import { getUserSubscription, checkUsageLimit, getPlanLimits } from "@/lib/subscription";
+import { getUserSubscription, checkUsageLimit } from "@/lib/subscription";
 import BillingPlansClient from "@/app/_components/BillingPlansClient";
 
 export const metadata: Metadata = { title: "Facturation" };
@@ -35,7 +35,7 @@ const PLANS: Plan[] = [
   {
     id: "pro",
     name: "Pro",
-    price: "89 €",
+    price: "99 €",
     period: "/ mois",
     description: "Pour les agences en croissance.",
     features: [
@@ -62,13 +62,6 @@ const PLANS: Plan[] = [
   },
 ];
 
-const PLAN_LABELS: Record<PlanId | "none", string> = {
-  starter: "Starter",
-  pro:     "Pro",
-  scale:   "Scale",
-  none:    "Aucun",
-};
-
 export default async function BillingPage() {
   const { userId } = await auth();
   if (!userId) return null;
@@ -79,14 +72,18 @@ export default async function BillingPage() {
     checkUsageLimit(userId, "analyses"),
   ]);
 
-  const limits = getPlanLimits(subscription.plan);
-  const currentPlan = subscription.plan as PlanId;
+  const currentPlan = (subscription?.plan ?? "starter") as PlanId;
 
-  const renewalDate = subscription.current_period_end
+  const statusLabel =
+    subscription?.status === "active"   ? "Actif"     :
+    subscription?.status === "canceled" ? "Annulé"    :
+    subscription?.status === "trialing" ? "Essai"     :
+    subscription?.status === "past_due" ? "En retard" :
+    "Inactif";
+
+  const renewalDate = subscription?.current_period_end
     ? new Date(subscription.current_period_end).toLocaleDateString("fr-FR", {
-        day: "numeric",
-        month: "long",
-        year: "numeric",
+        day: "numeric", month: "long", year: "numeric",
       })
     : null;
 
@@ -94,17 +91,12 @@ export default async function BillingPage() {
     {
       label: "Annonces IA",
       used:  listingsUsage.used,
-      limit: limits.listings,
+      limit: listingsUsage.limit,
     },
     {
       label: "Analyses marché",
       used:  analysesUsage.used,
-      limit: limits.analyses,
-    },
-    {
-      label: "Utilisateurs",
-      used:  1,
-      limit: limits.users,
+      limit: analysesUsage.limit,
     },
   ];
 
@@ -115,22 +107,14 @@ export default async function BillingPage() {
         <p className="mt-1 text-sm text-white/40">Gérez votre abonnement et vos paiements.</p>
       </div>
 
-      {/* Abonnement actif */}
+      {/* Plan actuel */}
       <div className="rounded-xl border border-white/[0.06] bg-[#0f0f13] p-6">
         <div className="flex items-start justify-between">
           <div>
             <p className="text-xs font-semibold uppercase tracking-widest text-white/25">Plan actuel</p>
             <div className="mt-2 flex items-center gap-3">
-              <p className="text-xl font-semibold text-white">
-                {PLAN_LABELS[currentPlan] ?? PLAN_LABELS[subscription.plan as PlanId] ?? "Starter"}
-              </p>
-              <span className="badge">
-                {subscription.status === "active"   ? "Actif"    :
-                 subscription.status === "canceled" ? "Annulé"   :
-                 subscription.status === "trialing" ? "Essai"    :
-                 subscription.status === "past_due" ? "En retard":
-                 "Inactif"}
-              </span>
+              <p className="text-xl font-semibold text-white capitalize">{currentPlan}</p>
+              <span className="badge">{statusLabel}</span>
             </div>
             {renewalDate && (
               <p className="mt-1 text-sm text-white/40">
@@ -148,12 +132,12 @@ export default async function BillingPage() {
           </a>
         </div>
 
-        {/* Usage */}
-        <div className="mt-6 grid grid-cols-2 gap-4 border-t border-white/[0.06] pt-5 sm:grid-cols-3">
+        {/* Usage du mois */}
+        <div className="mt-6 grid grid-cols-2 gap-6 border-t border-white/[0.06] pt-5">
           {usageItems.map((item) => {
             const isUnlimited = item.limit === -1;
             const pct = isUnlimited
-              ? Math.min(Math.round((item.used / Math.max(item.used + 10, 1)) * 100), 100)
+              ? 0
               : Math.min(Math.round((item.used / item.limit) * 100), 100);
 
             return (
@@ -167,7 +151,7 @@ export default async function BillingPage() {
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]">
                   <div
                     className="h-full rounded-full bg-white/40"
-                    style={{ width: `${pct}%` }}
+                    style={{ width: isUnlimited ? "0%" : `${pct}%` }}
                   />
                 </div>
               </div>
@@ -176,7 +160,7 @@ export default async function BillingPage() {
         </div>
       </div>
 
-      {/* Plans */}
+      {/* Changer de plan */}
       <div>
         <h2 className="mb-4 text-base font-semibold text-white/90">Changer de plan</h2>
         <BillingPlansClient plans={PLANS} currentPlan={currentPlan} />
