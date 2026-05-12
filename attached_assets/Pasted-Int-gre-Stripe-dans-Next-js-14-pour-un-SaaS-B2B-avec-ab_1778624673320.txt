@@ -1,0 +1,62 @@
+Intègre Stripe dans Next.js 14 pour un SaaS B2B avec abonnements mensuels.
+
+Fichiers à créer :
+
+1. lib/stripe.ts — client Stripe
+import Stripe from 'stripe';
+export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2024-06-20',
+});
+
+2. lib/subscription.ts — helpers plan/usage
+Fonctions :
+- getUserSubscription(userId: string) — récupère l'abonnement depuis Supabase
+- getPlanLimits(plan: string) — retourne les limites du plan :
+  starter: { listings: 30, analyses: 10, users: 1 }
+  pro: { listings: 150, analyses: 50, users: 5 }
+  scale: { listings: -1, analyses: -1, users: 15 } (-1 = illimité)
+- checkUsageLimit(userId: string, feature: 'listings' | 'analyses') — 
+  vérifie si l'user a atteint sa limite mensuelle
+  compte les entrées ai_usage du mois en cours
+  retourne { allowed: boolean, used: number, limit: number }
+
+3. app/api/checkout/route.ts — création session Stripe
+POST handler :
+- Récupère userId depuis auth() Clerk
+- Récupère le plan depuis le body (starter/pro/scale)
+- Mappe le plan vers le Price ID depuis les env vars
+- Récupère ou crée le customer Stripe depuis Supabase
+- Crée une Stripe Checkout Session avec :
+  mode: 'subscription'
+  success_url: /dashboard?success=true
+  cancel_url: /billing?canceled=true
+- Retourne { url: session.url }
+
+4. app/api/webhooks/stripe/route.ts — webhooks
+Écoute ces events :
+- checkout.session.completed → 
+  update subscriptions dans Supabase :
+  stripe_customer_id, stripe_subscription_id, plan, status: 'active'
+  update profiles.agency_id avec le bon plan
+- customer.subscription.updated → update status et plan
+- customer.subscription.deleted → status: 'canceled'
+Vérifie la signature avec stripe.webhooks.constructEvent()
+Utilise STRIPE_WEBHOOK_SECRET
+
+5. app/(dashboard)/billing/page.tsx — page billing
+Affiche :
+- Plan actuel avec badge
+- Usage du mois (annonces et analyses utilisées / limite)
+- 3 cards plans avec prix et features
+- Bouton "Choisir ce plan" qui appelle /api/checkout
+- Si plan actuel : badge "Plan actuel" disabled
+
+CONTRAINTES :
+- TypeScript strict, pas de any
+- Auth : Clerk auth()
+- Supabase : createAdminClient()
+- Stripe SDK v14
+- Pas de library externe
+- Gestion d'erreurs explicite sur chaque étape
+- Le webhook route doit avoir export const dynamic = 'force-dynamic'
+- Ajoute /api/webhooks/stripe dans les routes publiques du middleware
