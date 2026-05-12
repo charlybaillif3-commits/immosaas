@@ -119,8 +119,8 @@ export default async function LandingPage() {
               <p className="mb-4 text-xl text-white/40">{icon}</p>
               <h3 className="mb-2 text-base font-semibold text-white">{title}</h3>
               <p className="text-sm leading-relaxed text-white/50">{desc}</p>
-              <div className="mt-4 overflow-hidden rounded-lg border border-white/[0.06]">
-                <img src={img} alt={title} className="w-full h-auto object-cover" />
+              <div className="mt-6 -mx-8 -mb-8 overflow-hidden rounded-b-xl border-t border-white/[0.06]">
+                <img src={img} alt={title} className="w-full h-48 object-cover object-top" />
               </div>
             </div>
           ))}
